@@ -19,23 +19,24 @@ tf.set_random_seed(1)
 #mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 
 #第一行数据读不到？？？所以在第一行数据补了一行填充数据
-df = pd.read_csv('C:\\Users\\98259\\Desktop\\6.9学习相关文档\样本数据\\fiftMin\\samplePeakHour_训练数据 - 副本Line.csv')
+df = pd.read_csv('C:\\Users\\98259\\Desktop\\6.9学习相关文档\\样本数据\\fiftMin\\Sample\\sample_训练数据_tenLine.csv')
 data_sample = np.array(df).astype(float)
-#print(data_sample)
+print(data_sample.size)
 
-df = pd.read_csv('C:\\Users\\98259\\Desktop\\6.9学习相关文档\样本数据\\fiftMin\\label_2.csv')
+df = pd.read_csv('C:\\Users\\98259\\Desktop\\6.9学习相关文档\样本数据\\fiftMin\\Sample\\label_2.csv')
 data_label = np.array(df).astype(float)
 
 
 # hyperparameters
 lr = 0.001
-training_iters = 10000
-batch_size = 64 #batch_size 会影响RNN函数输出？？？？？？？？？？
+training_iters = 100000
+batch_size = 32 #batch_size 会影响RNN函数输出？？？？？？？？？？
 
 n_inputs = 2   # 两列数据，分别代表早晚高峰 2*16
-n_steps = 16   # time steps
+n_steps = 64   # time steps
 n_hidden_units = 128   # neurons in hidden layer
 n_classes = 2      # 二分类问题
+sample_size = 108   #样本数
 
 # tf Graph input
 x = tf.placeholder(tf.float32, [None, n_steps, n_inputs])
@@ -99,6 +100,8 @@ train_op = tf.train.AdamOptimizer(lr).minimize(cost)
 correct_pred = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
 accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
 
+saver = tf.train.Saver()
+
 with tf.Session() as sess:
     # tf.initialize_all_variables() no long valid from
     # 2017-03-02 if using tensorflow >= 0.12
@@ -108,12 +111,13 @@ with tf.Session() as sess:
         init = tf.global_variables_initializer()
     sess.run(init)
     step = 0
-    td = Tidal.DataSet.DataSet(data_sample, data_label, 104)
+    td = Tidal.DataSet.DataSet(data_sample, data_label, sample_size)
     while step * batch_size < training_iters:
         #batch_xs, batch_ys = mnist.train.next_batch(batch_size)
         batch_xs, batch_ys = td.next_batch(batch_size)
+        #print(batch_xs.size)
         batch_xs = batch_xs.reshape([batch_size, n_steps, n_inputs])
-        #batch_ys = batch_ys.reshape([n_steps,n_inputs])#待考究！！！！！！！！！！！
+
         sess.run([train_op], feed_dict={
             x: batch_xs,
             y: batch_ys,
@@ -124,3 +128,6 @@ with tf.Session() as sess:
             y: batch_ys,
             }))
         step += 1
+
+    # save_path = saver.save(sess, "my_net/lstmTidal.ckpt")
+    # print("Save to path: ", save_path)

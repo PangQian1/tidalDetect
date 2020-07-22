@@ -1,19 +1,3 @@
-"""
-To know more or get code samples, please visit my website:
-https://morvanzhou.github.io/tutorials/
-Or search: 莫烦Python
-Thank you for supporting!
-"""
-
-# please note, all tutorial code are running under python3.5.
-# If you use the version like python2.7, please modify the code accordingly
-
-# 8 - RNN Classifier example
-
-# to try tensorflow, un-comment following two lines
-# import os
-# os.environ['KERAS_BACKEND']='tensorflow'
-
 import numpy as np
 from sklearn.model_selection import train_test_split
 import pandas as pd
@@ -26,7 +10,51 @@ from keras.models import Sequential
 from keras.layers import SimpleRNN, Activation, Dense
 from keras.optimizers import Adam
 
-TIME_STEPS = 16     # same as the height of the image
+from sklearn.metrics import roc_auc_score
+
+import tensorflow as tf
+from keras import backend as K
+
+
+# AUC for a binary classifier
+def auc(y_true, y_pred):
+    ptas = tf.stack([binary_PTA(y_true, y_pred, k) for k in np.linspace(0, 1, 1000)], axis=0)
+    pfas = tf.stack([binary_PFA(y_true, y_pred, k) for k in np.linspace(0, 1, 1000)], axis=0)
+    pfas = tf.concat([tf.ones((1,)), pfas], axis=0)
+    binSizes = -(pfas[1:] - pfas[:-1])
+    s = ptas * binSizes
+    return K.sum(s, axis=0)
+
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------
+# PFA, prob false alert for binary classifier
+def binary_PFA(y_true, y_pred, threshold=K.variable(value=0.5)):
+    y_pred = K.cast(y_pred >= threshold, 'float32')
+    # N = total number of negative labels
+    N = K.sum(1 - y_true)
+    # FP = total number of false alerts, alerts from the negative class labels
+    FP = K.sum(y_pred - y_pred * y_true)
+    return FP / N
+
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------
+# P_TA prob true alerts for binary classifier
+def binary_PTA(y_true, y_pred, threshold=K.variable(value=0.5)):
+    y_pred = K.cast(y_pred >= threshold, 'float32')
+    # P = total number of positive labels
+    P = K.sum(y_true)
+    # TP = total number of correct alerts, alerts from the positive class labels
+    TP = K.sum(y_pred * y_true)
+    return TP / P
+
+
+# 接着在模型的compile中设置metrics
+# 如下例子，我用的是RNN做分类
+
+
+
+
+TIME_STEPS = 32     # same as the height of the image
 INPUT_SIZE = 2     # same as the width of the image
 BATCH_SIZE = 50
 BATCH_INDEX = 0
@@ -34,25 +62,30 @@ OUTPUT_SIZE = 2
 CELL_SIZE = 50
 LR = 0.001
 
-
 # download the mnist to the path '~/.keras/datasets/' if it is the first time to be called
 # X shape (60,000 28x28), y shape (10,000, )
 #(X_train, y_train), (X_test, y_test) = mnist.load_data()
 
-#第一行数据读不到？？？所以在第一行补了一行填充数据
-df = pd.read_csv('C:\\Users\\98259\\Desktop\\6.9学习相关文档\样本数据\\fiftMin\\samplePeakHour_训练数据 - 副本Line.csv')
-data_sample = np.array(df).astype(float)
-#print(data_sample)
 
-df = pd.read_csv('C:\\Users\\98259\\Desktop\\6.9学习相关文档\样本数据\\fiftMin\\label.csv')
+# df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\Sample15_1.csv', header=0)
+# data_sample = np.array(df).astype(float)
+# df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\label.csv', header=0)
+# data_label = np.array(df).astype(float)
+
+df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\Sample15_1.csv', header=None)
+data_sample = np.array(df).astype(float)
+df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\label.csv', header=None)
 data_label = np.array(df).astype(float)
-X_train, X_test, y_train, y_test = train_test_split(data_sample,data_label,test_size=0.1, random_state=0)
+
+
+X_train, X_test, y_train, y_test = train_test_split(data_sample,data_label,test_size=0.3, random_state=0)
 print(X_train.size)
 print(y_train.size)
 
 # data pre-processing
-X_train = X_train.reshape(-1, 16, 2)       # normalize
-X_test = X_test.reshape(-1, 16, 2)       # normalize
+
+X_train = X_train.reshape(-1, 32, 2)/3      # normalize
+X_test = X_test.reshape(-1, 32, 2)/3      # normalize
 y_train = np_utils.to_categorical(y_train, num_classes=2)
 y_test = np_utils.to_categorical(y_test, num_classes=2)
 
@@ -90,3 +123,12 @@ for step in range(4001):
     if step % 500 == 0:
         cost, accuracy = model.evaluate(X_test, y_test, batch_size=y_test.shape[0], verbose=False)
         print('test cost: ', cost, 'test accuracy: ', accuracy)
+
+df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\测试数据\\test.csv', header=None)
+#df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\Sample15_1.csv', header=None)
+data_pre = np.array(df).astype(float)
+data_pre = data_pre.reshape(-1, 32, 2)/3
+pre = model.predict_classes(data_pre)
+print(pre)
+# for i in range(20):
+#      print(pre[100*i:100*i+100:1])
