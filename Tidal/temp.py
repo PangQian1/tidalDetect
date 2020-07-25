@@ -84,7 +84,11 @@ def main():
     机器学习方法对比
     """
     # 读取数据
-    xs, ys, test = load_data('data/Sample15_1.csv', 'data/label.csv', 'data/test.csv')
+    xs, ys, test = load_data('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res\\resSam.csv',
+                             'E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res\\resLabel.csv',
+                             #'C:\\Users\\98259\\Desktop\\6.9学习相关文档\\样本数据\\fiftMin\\samplePeakHour_训练数据 - 副本Line.csv',
+                             'data/test_4.csv'
+                             )
     x_train, y_train, x_test, y_test = split_data(xs, ys, ratio=0.7)
     #print(np.isnan(test).any())
     test = test.loc[:,:]
@@ -93,9 +97,10 @@ def main():
     # 评价指标
     table = PrettyTable(['Methods', 'Accuracy', 'F1', 'Precision', 'Recall'])
     methods = {}
-    # 6.Decision Trees
-    dct = tree.DecisionTreeClassifier()
-    methods['Decision Trees'] = dct
+
+    # 2. Support Vector Machines
+    svc = svm.SVC()
+    methods['Support Vector Machines'] = svc
 
 
     for name, model in methods.items():

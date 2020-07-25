@@ -54,7 +54,7 @@ def binary_PTA(y_true, y_pred, threshold=K.variable(value=0.5)):
 
 
 
-TIME_STEPS = 32     # same as the height of the image
+TIME_STEPS = 16     # same as the height of the image
 INPUT_SIZE = 2     # same as the width of the image
 BATCH_SIZE = 50
 BATCH_INDEX = 0
@@ -67,15 +67,15 @@ LR = 0.001
 #(X_train, y_train), (X_test, y_test) = mnist.load_data()
 
 
-# df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\Sample15_1.csv', header=0)
-# data_sample = np.array(df).astype(float)
-# df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\label.csv', header=0)
-# data_label = np.array(df).astype(float)
-
-df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\Sample15_1.csv', header=None)
+df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res\\resSam.csv', header=None)
 data_sample = np.array(df).astype(float)
-df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\label.csv', header=None)
+df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res\\resLabel.csv', header=None)
 data_label = np.array(df).astype(float)
+
+# df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\Sample15_1.csv', header=None)
+# data_sample = np.array(df).astype(float)
+# df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\label.csv', header=None)
+# data_label = np.array(df).astype(float)
 
 
 X_train, X_test, y_train, y_test = train_test_split(data_sample,data_label,test_size=0.3, random_state=0)
@@ -84,8 +84,8 @@ print(y_train.size)
 
 # data pre-processing
 
-X_train = X_train.reshape(-1, 32, 2)/3      # normalize
-X_test = X_test.reshape(-1, 32, 2)/3      # normalize
+X_train = X_train.reshape(-1, 16, 2)/3      # normalize
+X_test = X_test.reshape(-1, 16, 2)/3      # normalize
 y_train = np_utils.to_categorical(y_train, num_classes=2)
 y_test = np_utils.to_categorical(y_test, num_classes=2)
 
@@ -124,10 +124,11 @@ for step in range(4001):
         cost, accuracy = model.evaluate(X_test, y_test, batch_size=y_test.shape[0], verbose=False)
         print('test cost: ', cost, 'test accuracy: ', accuracy)
 
-df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\测试数据\\test.csv', header=None)
+#df = pd.read_csv('C:\\Users\\98259\\Desktop\\6.9学习相关文档\\样本数据\\fiftMin\\samplePeakHour_训练数据 - 副本Line.csv',header=None)
+df = pd.read_csv('data/test_4.csv', header=None)
 #df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\Sample15_1.csv', header=None)
 data_pre = np.array(df).astype(float)
-data_pre = data_pre.reshape(-1, 32, 2)/3
+data_pre = data_pre.reshape(-1, 16, 2)/3
 pre = model.predict_classes(data_pre)
 print(pre)
 # for i in range(20):

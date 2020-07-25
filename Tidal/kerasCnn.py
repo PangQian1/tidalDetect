@@ -66,18 +66,19 @@ def binary_PTA(y_true, y_pred, threshold=K.variable(value=0.5)):
 
 # download the mnist to the path '~/.keras/datasets/' if it is the first time to be called
 # training X shape (60000, 28x28), Y shape (60000, ). test X shape (10000, 28x28), Y shape (10000, )
-#df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\Sample15_2.csv', header=0)
-df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\Sample15_1.csv', header=0)
+#df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\Sample15_1.csv', header=0)
+#df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\label.csv', header=0)
+
+df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res\\resSam.csv', header=None)
 data_sample = np.array(df).astype(float)
-df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\label.csv', header=0)
-#df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\label.csv', header=0)
+df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res\\resLabel.csv', header=None)
 data_label = np.array(df).astype(float)
 X_train, X_test, y_train, y_test = train_test_split(data_sample,data_label,test_size=0.3, random_state=0)
 
 # data pre-processing
 #-1是样本的个数，1是chanel,代表高度
-X_train = X_train.reshape(-1, 1,32, 2)/3.
-X_test = X_test.reshape(-1, 1,32, 2)/3.
+X_train = X_train.reshape(-1, 1,16, 2)/3.
+X_test = X_test.reshape(-1, 1,16, 2)/3.
 y_train = np_utils.to_categorical(y_train, num_classes=2)
 y_test = np_utils.to_categorical(y_test, num_classes=2)
 
@@ -86,7 +87,7 @@ model = Sequential()
 
 # Conv layer 1 output shape (32, 28, 28)
 model.add(Convolution2D(
-    batch_input_shape=(None, 1, 32, 2),
+    batch_input_shape=(None, 1, 16, 2),
     filters=16, #卷积核
     kernel_size=2,
     strides=1,
@@ -139,8 +140,10 @@ print('\ntest loss: ', loss)
 
 print('\ntest accuracy: ', accuracy)
 
-df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\测试数据\\test.csv', header=None)
+#df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\测试数据\\test.csv', header=None)
+#df = pd.read_csv('data/test_4.csv', header=None)
+df = pd.read_csv('C:\\Users\\98259\\Desktop\\6.9学习相关文档\\样本数据\\fiftMin\\samplePeakHour_训练数据 - 副本Line.csv',header=None)
 data_pre = np.array(df).astype(float)
-data_pre = data_pre.reshape(-1, 1,32, 2)/3
+data_pre = data_pre.reshape(-1, 1,16, 2)/3
 pre = model.predict_classes(data_pre)
 print(pre)

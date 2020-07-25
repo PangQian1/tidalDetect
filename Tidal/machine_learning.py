@@ -81,7 +81,10 @@ def main():
     机器学习方法对比
     """
     # 读取数据
-    xs, ys = load_data('data/Sample15_1.csv', 'data/label.csv')
+    #xs, ys = load_data('data/Sample15_1.csv', 'data/label.csv')
+    #xs, ys = load_data('data/Sample_4_15_1.csv', 'data/label_4.csv')
+    xs, ys = load_data('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res\\resSam.csv',
+                             'E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res\\resLabel.csv')
     x_train, y_train, x_test, y_test = split_data(xs, ys, ratio=0.7)
 
     # 测试不同方法
