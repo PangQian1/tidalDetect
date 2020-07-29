@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import csv
 import random
 import warnings
 
@@ -58,6 +59,8 @@ def get_result(name, model, x_train, y_train, x_test, y_test, test, table):
     acc, f1, p, recall, p_r = get_metrics(y_pred, y_test)
     table.add_row([name, f'{acc * 100:.4f}', f'{f1 * 100:.4f}', f'{p * 100:.4f}', f'{recall * 100:.4f}'])
 
+    preGrid(model)
+
 #划分数据集
 def split_data(xs, ys, ratio=0.7):
     """
@@ -78,7 +81,6 @@ def split_data(xs, ys, ratio=0.7):
     x_test, y_test = xs.loc[indexes_test, :], ys.loc[indexes_test, :]
     return x_train, y_train, x_test, y_test
 
-
 def main():
     """
     机器学习方法对比
@@ -97,6 +99,10 @@ def main():
     # 评价指标
     table = PrettyTable(['Methods', 'Accuracy', 'F1', 'Precision', 'Recall'])
     methods = {}
+    #
+    # # 7.5 XGBoosting
+    # xg = XGBClassifier()
+    # methods['XGBoosting'] = xg
 
     # 2. Support Vector Machines
     svc = svm.SVC()
@@ -106,6 +112,37 @@ def main():
     for name, model in methods.items():
         get_result(name, model, x_train, y_train, x_test, y_test, test, table)
     print(table)
+
+def preGrid(model):
+    gridLinkPeerPath = 'E:/G-1149/trafficCongestion/网格化/gridLinkPeer_14.csv'
+    gridTidalPath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridTidal_ml_14.csv'
+    linkStatusPath = "E:/G-1149/trafficCongestion/网格化/linkStatus_14_完整.csv"
+
+    statusDict = {}
+    with open(linkStatusPath, 'r') as file:
+        reader = csv.reader(file)
+        for r in reader:  # r是一个list
+            statusDict[r[0]] = r[1:]
+
+    f = open(gridTidalPath, 'w', encoding='utf-8', newline='')  # newline解决空行问题
+    csv_writer = csv.writer(f)
+
+    with open(gridLinkPeerPath, 'r') as file:
+        reader = csv.reader(file)
+        for r in reader:  # r是一个list
+            if (len(r) == 1):
+                continue
+            linkPeer = r[1:]
+            for i in range(len(linkPeer)):
+                if (i % 2 != 0):
+                    pre = np.array(linkStatus + statusDict[linkPeer[i]]).astype(float)
+                    pre = pre.reshape(-1, 32)
+                    pre = model.predict(pre)
+                    csv_writer.writerow([r[0], pre[0]])
+                else:
+                    linkStatus = statusDict[linkPeer[i]]
+
+    f.close()
 
 
 if __name__ == '__main__':
