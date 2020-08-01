@@ -76,9 +76,9 @@ for step in range(4001):
         print('test cost: ', cost, 'test accuracy: ', accuracy)
 
 
-gridLinkPeerPath = 'E:/G-1149/trafficCongestion/网格化/gridLinkPeer_14.csv'
-gridTidalPath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridTidal_rnn_14.csv'
-linkStatusPath = "E:/G-1149/trafficCongestion/网格化/linkStatus_14_完整.csv"
+gridLinkPeerPath = 'E:/G-1149/trafficCongestion/网格化/gridLinkPeer_13.csv'
+gridTidalPath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridTidal_rnn_13.csv'
+linkStatusPath = "E:/G-1149/trafficCongestion/网格化/linkStatus_13_完整.csv"
 test = '../Tidal/data/test_4.csv'
 
 statusDict = {}
@@ -105,7 +105,7 @@ with open(gridLinkPeerPath, 'r') as file:
                 pre = np.array(linkStatus + statusDict[linkPeer[i]]).astype(float)
                 pre = pre.reshape(-1, 16, 2) / 3
                 pre = model.predict_classes(pre)
-                csv_writer.writerow([r[0], pre[0]])
+                csv_writer.writerow([r[0], pre[0]])     #网格编号，预测值
             else:
                 linkStatus = statusDict[linkPeer[i]]
 
