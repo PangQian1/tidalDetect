@@ -1,6 +1,6 @@
 import csv
 
-class UF:
+class UnionFind:
     # 记录连通分量个数 int
     count = 0
     # 存储若⼲棵树 int[]
@@ -15,10 +15,10 @@ class UF:
         with open(path, 'r') as file:
             reader = csv.reader(file)
             for r in reader:  # r是一个list
-                self.count = self.count + 1
                 self.size.append(1) #初始每棵树都只有根节点
                 self.parent.append(self.count)
                 self.grid.append(int(r[0]))
+                self.count = self.count + 1
                 
     # 将 p 和 q 连通 
     def union(self, p, q):
@@ -55,16 +55,16 @@ class UF:
     def getCount(self):
         return self.count
 
-    #遍历所有的节点，按照连通性分类
+    #遍历所有的节点，按照连通性对grid内容分类
     def classification(self):
         dict = {}
         for i in range(len(self.parent)):
             root = self.find(i)
-            if(dict.has_key(root)):
+            if(root in dict.keys()):
                 list = dict[root]
-                list.append(i)
+                list.append(self.grid[i])
                 dict[root] = list
             else:
-                dict[root] = [i]
+                dict[root] = [self.grid[i]]
 
         return dict

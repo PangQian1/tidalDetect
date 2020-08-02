@@ -1,6 +1,9 @@
 import csv
+import grid.UF as gu
 
-def getName(bjTopologyPath, gridLinkPeerPath, gridPath, resPath):
+#根据网格获取道路名称
+def getName(bjTopologyPath, gridLinkPeerPath, gridSplicePath, resPath):
+    #link 和 name 对应字典
     nameDict = {}
     with open(bjTopologyPath, 'r') as file:
         reader = csv.reader(file)
@@ -15,48 +18,51 @@ def getName(bjTopologyPath, gridLinkPeerPath, gridPath, resPath):
 
     f = open(resPath, 'w', encoding='utf-8', newline='')  # newline解决空行问题
     csv_writer = csv.writer(f)
-    with open(gridPath, 'r') as file:
+    with open(gridSplicePath, 'r') as file:
         reader = csv.reader(file)
-        for r in reader:  # r是一个list
-            linkList = gridLinkPeerDict[r[0]]
-            for i in range(len(linkList)):
-                csv_writer.writerow([linkList[i], nameDict[linkList[i]]])
+        for r in reader:
+            nameList = []
+            for i in range(len(r)):
+                for j in range(len(gridLinkPeerDict[r[i]])):
+                    link = gridLinkPeerDict[r[i]][j]
+                    nameList.append(nameDict[link])
+            csv_writer.writerow(nameList)
 
     f.close()
-
+"""
+union-find算法
+对已经提取出来的具有潮汐现象的网格进行“连通性”处理，以拼接成一段完整的道路
+"""
 def splice(gridPath, gridSplicePath):
     f = open(gridSplicePath, 'w', encoding='utf-8', newline='')  # newline解决空行问题
     csv_writer = csv.writer(f)
-    with open(gridPath, 'r') as file:
-        reader = csv.reader(file)
-        spliceList = [[int((next(reader))[0])]]
-        print(spliceList)
-        for r in reader:  # r是一个list
-            gridNum = int(r[0])
-            flag = False
-            for i in range(len(spliceList)):
-                for j in range(len(spliceList[i])):
-                    if(abs(gridNum-spliceList[i][j]) == 1 or abs(gridNum-spliceList[i][j]) == 1782 or
-                    abs(gridNum-spliceList[i][j]) == 1783 or abs(gridNum-spliceList[i][j]) == 1784):
-                        spliceList[i].append(gridNum)
-                        flag = True
-                        break
+    uf = gu.UnionFind(gridPath)
+    for i in range(len(uf.grid)-1):
+        for j in range(i+1, len(uf.grid)):
+            if (abs(uf.grid[j] - uf.grid[i]) == 1 or abs(uf.grid[j] - uf.grid[i]) == 1782 or
+                    abs(uf.grid[j] - uf.grid[i]) == 1783 or abs(uf.grid[j] - uf.grid[i]) == 1784):
+                uf.union(i, j)
+                #print(str(uf.grid[i]) + ' ' + str(uf.grid[i+1]))
 
-
+    dic = uf.classification()
+    for key in dic.keys():
+        csv_writer.writerow(dic[key])
 
     f.close()
 
 if __name__ == '__main__':
+
+    #读文件
     gridLinkPeerPath = 'E:/G-1149/trafficCongestion/网格化/gridLinkPeer_14.csv'
     gridPath = 'E:/G-1149/trafficCongestion/网格化/tidal/rnn_14.csv'
     bjTopologyPath = "E:/G-1149/trafficCongestion/bjTopology.csv"
 
-    resPath = 'E:/G-1149/trafficCongestion/网格化/tidal/name_1.csv'
+    #写文件
+    resPath = 'E:/G-1149/trafficCongestion/网格化/tidal/name.csv'
     gridSplicePath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridSplice.csv'
 
-    #getName(bjTopologyPath, gridLinkPeerPath, gridPath, resPath)
-    #splice(gridPath, gridSplicePath)
+    splice(gridPath, gridSplicePath)
+    getName(bjTopologyPath, gridLinkPeerPath, gridSplicePath, resPath)
 
-    print(1 == 2)
-    print(1 == 1)
+
 
