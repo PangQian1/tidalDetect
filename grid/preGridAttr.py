@@ -100,6 +100,7 @@ with open(gridLinkPeerPath, 'r') as file:
         if(len(r) == 1):
             continue
         linkPeer = r[1:]
+        peerList = []
         for i in range(len(linkPeer)):
             if(linkPeer[i] not in statusDict.keys()):
                 break
@@ -107,11 +108,15 @@ with open(gridLinkPeerPath, 'r') as file:
                 pre = np.array(linkStatus + statusDict[linkPeer[i]]).astype(float)
                 pre = pre.reshape(-1, 16, 2) / 3
                 pre = model.predict_classes(pre)
-                #csv_writer1.writerow([r[0], pre[0]])     #网格编号，预测值
                 if(pre[0] == 1):
-                    csv_writer.writerow([r[0], linkPeer[i-1], linkPeer[i]])
+                    #csv_writer1.writerow([r[0], linkPeer[i-1], linkPeer[i]])
+                    peerList.append(linkPeer[i-1])
+                    peerList.append(linkPeer[i])
             else:
                 linkStatus = statusDict[linkPeer[i]]
+        if(len(peerList) > 1):
+            peerList.insert(0, r[0])
+            csv_writer.writerow(peerList)
 
 f.close()
 #f1.close()
