@@ -1,8 +1,10 @@
 import csv
 import grid.UF as gu
 
-#根据网格获取道路名称
-def getName(bjTopologyPath, linkPeerPath, gridSplicePath, resPath):
+'''
+根据拼接后的网格，提取道路起止点，道路长度，道路名称
+'''
+def getTidalRoadAttr(bjTopologyPath, gridTidalPath, gridPoiPath, gridSplicePath, resPath):
     #link 和 name 对应字典
     nameDict = {}
     with open(bjTopologyPath, 'r') as file:
@@ -10,11 +12,19 @@ def getName(bjTopologyPath, linkPeerPath, gridSplicePath, resPath):
         for r in reader:  # r是一个list
             nameDict[r[0]] = r[6]
 
+    #网格编号和网格内的linkPeer，不少于一对，一般不会超过两对
     gridLinkPeerDict = {}
-    with open(linkPeerPath, 'r') as file:
+    with open(gridTidalPath, 'r') as file:
         reader = csv.reader(file)
         for r in reader:  # r是一个list
             gridLinkPeerDict[r[0]] = r[1:]
+
+    #网格编号，经度:纬度
+    gridPoiDict = {}
+    with open(gridPoiPath, 'r') as file:
+        reader = csv.reader(file)
+        for r in reader:
+            gridPoiDict[r[0]] = r[1]
 
     f = open(resPath, 'w', encoding='utf-8', newline='')  # newline解决空行问题
     csv_writer = csv.writer(f)
@@ -22,12 +32,14 @@ def getName(bjTopologyPath, linkPeerPath, gridSplicePath, resPath):
         reader = csv.reader(file)
         for r in reader:
             nameList = []
-            for i in range(len(r)):
+            length = len(r)
+            for i in range(length):
                 for j in range(len(gridLinkPeerDict[r[i]])):
                     link = gridLinkPeerDict[r[i]][j]
-                    if(nameDict[link] not in nameList):
-                        nameList.append(nameDict[link])
-            csv_writer.writerow(nameList)
+                    if(link != ''):#由于对预测后的网格文件进行了排序处理，Excel自动格式对齐，因此出现了空白填充
+                        if(nameDict[link] not in nameList):
+                            nameList.append(nameDict[link])
+            csv_writer.writerow([gridPoiDict[r[0]], gridPoiDict[r[length-1]], length*100, '-'.join(nameList)])
 
     f.close()
 
@@ -56,14 +68,15 @@ if __name__ == '__main__':
 
     #读文件
     gridTidalPath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridTidal_rnn_14.csv'
+    gridPoiPath = 'E:/G-1149/trafficCongestion/网格化/gridPoi.csv'
     bjTopologyPath = "E:/G-1149/trafficCongestion/bjTopology.csv"
 
     #写文件
     resPath = 'E:/G-1149/trafficCongestion/网格化/tidal/name.csv'
     gridSplicePath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridSplice.csv'
 
-    splice(gridTidalPath, gridSplicePath)
-    #getName(bjTopologyPath, gridTidalPath, gridSplicePath, resPath)
+    #splice(gridTidalPath, gridSplicePath)
+    getTidalRoadAttr(bjTopologyPath, gridTidalPath, gridPoiPath, gridSplicePath, resPath)
 
 
 
