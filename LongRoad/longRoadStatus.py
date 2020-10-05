@@ -73,7 +73,8 @@ def getParallelLink(longRoadMidPath, linkAttrPath, roadPath, dir1, dir2, dir3, d
     f.close()
 
 if __name__ == '__main__':
-    roadName = '学院路'
+    date = '13'
+    roadName = '京开'
     #dir1 和 dir2 是一个方向
     dir1 = '0'
     dir2 = '1'
@@ -81,15 +82,15 @@ if __name__ == '__main__':
     dir4 = '3'
 
     #读文件
-    linkStatusPath = 'E:/G-1149/trafficCongestion/网格化/linkStatus_14_完整.csv'
+    linkStatusPath = 'E:/G-1149/trafficCongestion/网格化/linkStatus_' + date + '_完整.csv'
     linkAttrPath = 'E:/G-1149/trafficCongestion/网格化/linkAttr.csv'
     longRoadMidPath = 'E:/G-1149/trafficCongestion/北京地图数据/beijing/dealedMap/长路段验证/' + roadName + '.MID'
 
     #写文件
     roadPath = 'E:/G-1149/trafficCongestion/长路段判定/' + roadName + '.csv'
-    getParallelLink(longRoadMidPath, linkAttrPath, roadPath, dir1, dir2, dir3, dir4)
+    #getParallelLink(longRoadMidPath, linkAttrPath, roadPath, dir1, dir2, dir3, dir4)
 
-    resPath = 'E:/G-1149/trafficCongestion/长路段判定/' + roadName + 'status.csv'
+    resPath = 'E:/G-1149/trafficCongestion/长路段判定/' + roadName + '_' + date + 'status.csv'
     longRoad(linkStatusPath, roadPath, linkAttrPath, resPath)
 
 
