@@ -72,9 +72,37 @@ def getParallelLink(longRoadMidPath, linkAttrPath, roadPath, dir1, dir2, dir3, d
     csv_writer.writerow(resListSec)
     f.close()
 
+def getJingzangSta(linkStatusPath, roadPath, resPath):
+    # link 和 status 对应字典
+    linkStatusDict = {}
+    with open(linkStatusPath, 'r') as file:
+        reader = csv.reader(file)
+        for r in reader:  # r是一个list
+            linkStatusDict[r[0]] = r[1:]
+
+    # linkPeer list
+    linkPeer = []
+    with open(roadPath, 'r') as file:
+        reader = csv.reader(file)
+        list = []
+        for r in reader:  # r是一个list
+            list.append(r)
+        for i in range(34):
+            linkPeer.append([list[0][i], list[1][i]])
+
+    f = open(resPath, 'w', encoding='utf-8', newline='')  # newline解决空行问题
+    csv_writer = csv.writer(f)
+    for i in linkPeer:
+        if(i[0] in linkStatusDict and i[1] in linkStatusDict):
+            list = linkStatusDict[i[0]] + linkStatusDict[i[1]]
+            csv_writer.writerow(list)
+
+    f.close()
+
+
 if __name__ == '__main__':
-    date = '13'
-    roadName = '京开'
+    date = '14'
+    roadName = '京藏高速'
     #dir1 和 dir2 是一个方向
     dir1 = '0'
     dir2 = '1'
@@ -91,6 +119,10 @@ if __name__ == '__main__':
     #getParallelLink(longRoadMidPath, linkAttrPath, roadPath, dir1, dir2, dir3, dir4)
 
     resPath = 'E:/G-1149/trafficCongestion/长路段判定/' + roadName + '_' + date + 'status.csv'
-    longRoad(linkStatusPath, roadPath, linkAttrPath, resPath)
+    #longRoad(linkStatusPath, roadPath, linkAttrPath, resPath)
+
+    #京藏高速13日数据特征时序构造
+    jingzang = 'E:/G-1149/trafficCongestion/长路段判定/jingzang.csv'
+    getJingzangSta(linkStatusPath, roadPath, jingzang)
 
 

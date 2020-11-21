@@ -9,6 +9,7 @@ from sklearn import linear_model, svm, neighbors, naive_bayes, tree, ensemble
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, precision_recall_curve
 from xgboost import XGBClassifier
 import numpy as np
+from Tidal import dao
 
 random.seed(123)
 warnings.filterwarnings('ignore')
@@ -55,7 +56,7 @@ def get_result(name, model, x_train, y_train, x_test, y_test, test, table):
     """
     model.fit(x_train, y_train)
     y_pred = model.predict(x_test)
-    print(model.predict(test))
+    dao.score(model.predict(test))
     acc, f1, p, recall, p_r = get_metrics(y_pred, y_test)
     table.add_row([name, f'{acc * 100:.4f}', f'{f1 * 100:.4f}', f'{p * 100:.4f}', f'{recall * 100:.4f}'])
 
@@ -99,15 +100,22 @@ def main():
     # 评价指标
     table = PrettyTable(['Methods', 'Accuracy', 'F1', 'Precision', 'Recall'])
     methods = {}
-    #
-    # # 7.5 XGBoosting
-    # xg = XGBClassifier()
-    # methods['XGBoosting'] = xg
 
     # 2. Support Vector Machines
     svc = svm.SVC()
     methods['Support Vector Machines'] = svc
 
+    # 4. Nearest Neighbors
+    knn = neighbors.KNeighborsClassifier(n_neighbors=5, weights='uniform')
+    methods['Nearest Neighbors'] = knn
+
+    # 7.4 Gradient Tree Boosting
+    gbdt = ensemble.GradientBoostingClassifier()
+    methods['Gradient Tree Boosting'] = gbdt
+
+    # 7.5 XGBoosting
+    #xg = XGBClassifier()
+    #methods['XGBoosting'] = xg
 
     for name, model in methods.items():
         get_result(name, model, x_train, y_train, x_test, y_test, test, table)
@@ -144,7 +152,7 @@ def preGrid(model):
 
     f.close()
 
-
+from sklearn.metrics import accuracy_score
 if __name__ == '__main__':
     main()
 

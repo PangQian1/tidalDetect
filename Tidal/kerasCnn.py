@@ -14,6 +14,13 @@ Thank you for supporting!
 # import os
 # os.environ['KERAS_BACKEND']='tensorflow'
 
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import f1_score
+import csv
+from Tidal import dao
+
 import numpy as np
 import pandas as pd
 np.random.seed(1337)  # for reproducibility
@@ -126,11 +133,13 @@ adam = Adam(lr=1e-4)
 # We add metrics to get more results you want to see
 model.compile(optimizer=adam,
               loss='categorical_crossentropy',
-              metrics=[auc])
+              metrics=['accuracy'])
+              #metrics=[auc])
 
 print('Training ------------')
 # Another way to train the model
-model.fit(X_train, y_train, epochs=20, batch_size=128,)
+model.fit(X_train, y_train, epochs=200, batch_size=128,)
+
 
 print('\nTesting ------------')
 # Evaluate the model with the metrics we defined earlier
@@ -140,6 +149,34 @@ print('\ntest loss: ', loss)
 
 print('\ntest accuracy: ', accuracy)
 
+y_pred = model.predict_classes(X_test)
+y_test_new = []
+tp = 0
+tn = 0
+fp = 0
+fn = 0
+index = 0
+for i in y_test:
+    if(i[1] == 1):
+        y_test_new.append(1)
+        if(y_pred[index] == 1):
+            tp += 1
+        else:
+            fn += 1
+    else:
+        y_test_new.append(0)
+        if(y_pred[index] == 1):
+            fp += 1
+        else:
+            tn += 1
+    index += 1
+
+print('tp ', tp, ' fn ', fn, ' fp ', fp, ' tn ', tn)
+print('accuracy: ', accuracy_score(y_test_new, y_pred), ' ', (tp+tn)/(tp+tn+fp+fn))
+print('precision: ', precision_score(y_test_new, y_pred, average='micro'),' ', tp/(tp+fp))
+print('recall: ', recall_score(y_test_new, y_pred, average='micro'),' ', tp/(tp+fn))
+print('f1: ', f1_score(y_test_new, y_pred, average='micro'),' ', 2*tp/(2*tp+fp+fn))
+
 #df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\测试数据\\test.csv', header=None)
 #df = pd.read_csv('data/test_4.csv', header=None)
 df = pd.read_csv('C:\\Users\\98259\\Desktop\\6.9学习相关文档\\样本数据\\fiftMin\\samplePeakHour_训练数据 - 副本Line.csv',header=None)
@@ -147,3 +184,4 @@ data_pre = np.array(df).astype(float)
 data_pre = data_pre.reshape(-1, 1,16, 2)/3
 pre = model.predict_classes(data_pre)
 print(pre)
+dao.score(pre)

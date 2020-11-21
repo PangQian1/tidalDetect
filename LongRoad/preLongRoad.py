@@ -106,7 +106,7 @@ for step in range(4001):
         cost, accuracy = model.evaluate(X_test, y_test, batch_size=y_test.shape[0], verbose=False)
         print('test cost: ', cost, 'test accuracy: ', accuracy)
 
-roadName = '京开'
+roadName = '京藏高速'
 date = '13'
 df = pd.read_csv('E:/G-1149/trafficCongestion/长路段判定/' + roadName + '_' + date + 'status_line.csv', header=None)
 

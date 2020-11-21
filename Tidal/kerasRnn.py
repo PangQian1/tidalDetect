@@ -1,6 +1,13 @@
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import f1_score
+from Tidal import dao
+
 import numpy as np
 from sklearn.model_selection import train_test_split
 import pandas as pd
+import csv
 
 np.random.seed(1337)  # for reproducibility
 
@@ -47,12 +54,7 @@ def binary_PTA(y_true, y_pred, threshold=K.variable(value=0.5)):
     TP = K.sum(y_pred * y_true)
     return TP / P
 
-
 # 接着在模型的compile中设置metrics
-# 如下例子，我用的是RNN做分类
-
-
-
 
 TIME_STEPS = 16     # same as the height of the image
 INPUT_SIZE = 2     # same as the width of the image
@@ -72,7 +74,7 @@ data_sample = np.array(df).astype(float)
 df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res\\resLabel.csv', header=None)
 data_label = np.array(df).astype(float)
 
-# df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\Sample15_1.csv', header=None)
+# df = pd.read_csv('E:\\G-1149\\trafficCon长短时记忆神经gestion\\训练数据\\trainData\\Sample15_1.csv', header=None)
 # data_sample = np.array(df).astype(float)
 # df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\label.csv', header=None)
 # data_label = np.array(df).astype(float)
@@ -109,6 +111,7 @@ model.add(Activation('softmax'))
 adam = Adam(LR)
 model.compile(optimizer=adam,
               loss='categorical_crossentropy',
+              #metrics=[auc])
               metrics=['accuracy'])
 
 # training
@@ -124,6 +127,34 @@ for step in range(4001):
         cost, accuracy = model.evaluate(X_test, y_test, batch_size=y_test.shape[0], verbose=False)
         print('test cost: ', cost, 'test accuracy: ', accuracy)
 
+y_pred = model.predict_classes(X_test)
+y_test_new = []
+tp = 0
+tn = 0
+fp = 0
+fn = 0
+index = 0
+for i in y_test:
+    if(i[1] == 1):
+        y_test_new.append(1)
+        if(y_pred[index] == 1):
+            tp += 1
+        else:
+            fn += 1
+    else:
+        y_test_new.append(0)
+        if(y_pred[index] == 1):
+            fp += 1
+        else:
+            tn += 1
+    index += 1
+
+print('tp ', tp, ' fn ', fn, ' fp ', fp, ' tn ', tn)
+print('accuracy: ', accuracy_score(y_test_new, y_pred), ' ', (tp+tn)/(tp+tn+fp+fn))
+print('precision: ', precision_score(y_test_new, y_pred, average='micro'),' ', tp/(tp+fp))
+print('recall: ', recall_score(y_test_new, y_pred, average='micro'),' ', tp/(tp+fn))
+print('f1: ', f1_score(y_test_new, y_pred, average='micro'),' ', 2*tp/(2*tp+fp+fn))
+
 #df = pd.read_csv('C:\\Users\\98259\\Desktop\\6.9学习相关文档\\样本数据\\fiftMin\\samplePeakHour_训练数据 - 副本Line.csv',header=None)
 df = pd.read_csv('data/test_4.csv', header=None)
 #df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\Sample15_1.csv', header=None)
@@ -131,5 +162,4 @@ data_pre = np.array(df).astype(float)
 data_pre = data_pre.reshape(-1, 16, 2)/3
 pre = model.predict_classes(data_pre)
 print(pre)
-# for i in range(20):
-#      print(pre[100*i:100*i+100:1])
+dao.score(pre)
