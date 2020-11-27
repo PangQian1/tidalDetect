@@ -76,9 +76,9 @@ for step in range(4001):
         print('test cost: ', cost, 'test accuracy: ', accuracy)
 
 
-gridLinkPeerPath = 'E:/G-1149/trafficCongestion/网格化/gridLinkPeer_14.csv'
-gridTidalPath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridTidal_rnn_14.csv'
-linkStatusPath = "E:/G-1149/trafficCongestion/网格化/linkStatus_14_完整.csv"
+gridLinkPeerPath = 'E:/G-1149/trafficCongestion/网格化/gridLinkPeer_13.csv'
+gridTidalPath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridTidal_rnn_new13.csv'
+linkStatusPath = "E:/G-1149/trafficCongestion/网格化/linkStatus_13_完整.csv"
 test = '../Tidal/data/test_4.csv'
 
 #gridTidalPath_1 = 'E:/G-1149/trafficCongestion/网格化/tidal/gridTidal_rnn_14_1.csv'

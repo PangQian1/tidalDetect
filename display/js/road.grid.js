@@ -1,4 +1,5 @@
-$.get('data/grid-beijing.json', function (data) {
+//grid-beijing
+$.get('data/14.json', function (data) {
     let option = {
         tooltip: {
             axisPointer: {

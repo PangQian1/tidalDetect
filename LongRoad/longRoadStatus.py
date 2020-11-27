@@ -2,7 +2,7 @@ import csv
 
 '''
 计算结果有待验证
-获取长路段的status 
+获取长路段的status序列，用以画折线图
 '''
 def longRoad(linkStatusPath, roadPath, linkAttrPath, resPath):
     #link 和 length 对应字典
@@ -102,7 +102,7 @@ def getJingzangSta(linkStatusPath, roadPath, resPath):
 
 if __name__ == '__main__':
     date = '14'
-    roadName = '京藏高速'
+    roadName = '京沪高速北段'
     #dir1 和 dir2 是一个方向
     dir1 = '0'
     dir2 = '1'
@@ -116,13 +116,14 @@ if __name__ == '__main__':
 
     #写文件
     roadPath = 'E:/G-1149/trafficCongestion/长路段判定/' + roadName + '.csv'
-    #getParallelLink(longRoadMidPath, linkAttrPath, roadPath, dir1, dir2, dir3, dir4)
+    getParallelLink(longRoadMidPath, linkAttrPath, roadPath, dir1, dir2, dir3, dir4)
 
     resPath = 'E:/G-1149/trafficCongestion/长路段判定/' + roadName + '_' + date + 'status.csv'
-    #longRoad(linkStatusPath, roadPath, linkAttrPath, resPath)
+    longRoad(linkStatusPath, roadPath, linkAttrPath, resPath)
 
+    #后续工作添加的临时支撑的东西，可忽视
     #京藏高速13日数据特征时序构造
     jingzang = 'E:/G-1149/trafficCongestion/长路段判定/jingzang.csv'
-    getJingzangSta(linkStatusPath, roadPath, jingzang)
+    #getJingzangSta(linkStatusPath, roadPath, jingzang)
 
 

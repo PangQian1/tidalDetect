@@ -1,5 +1,5 @@
 """
-网格编号和网格坐标的转换
+网格编号至网格坐标的转换，同时提取了道路名称，用以可视化（因为可视化需要坐标作为支持）
 """
 
 import csv
@@ -50,11 +50,11 @@ def numToCoor(gridTidalPath, bjTopologyPath,  gridPoiPath, outPath):
 if __name__ == '__main__':
 
     #读文件
-    gridTidalPath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridTidal_rnn_14.csv'
+    gridTidalPath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridTidal_rnn_new13.csv'
     bjTopologyPath = "E:/G-1149/trafficCongestion/bjTopology.csv"
     gridPoiPath = 'E:/G-1149/trafficCongestion/网格化/gridPoi.csv'
 
     #写文件
-    coorPath = 'E:/G-1149/trafficCongestion/网格化/tidal/coordinate.csv'
+    coorPath = 'E:/G-1149/trafficCongestion/网格化/tidal/coordinate_new13.csv'
 
     numToCoor(gridTidalPath, bjTopologyPath,  gridPoiPath, coorPath)
