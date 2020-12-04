@@ -138,8 +138,20 @@ model.compile(optimizer=adam,
 
 print('Training ------------')
 # Another way to train the model
-model.fit(X_train, y_train, epochs=200, batch_size=128,)
+#model.fit(X_train, y_train, epochs=200, batch_size=128,)
 
+history = model.fit(X_train, y_train, epochs=100, batch_size=128,)
+
+acc = history.history['accuracy']
+loss = history.history['loss']
+epochs = range(1, len(acc) + 1)
+
+import matplotlib.pyplot as plt
+plt.title('Accuracy and Loss')
+plt.plot(epochs, acc, 'red', label='Training acc')
+plt.plot(epochs, loss, 'blue', label='Validation loss')
+plt.legend()
+plt.show()
 
 print('\nTesting ------------')
 # Evaluate the model with the metrics we defined earlier

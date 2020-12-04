@@ -1,23 +1,23 @@
+import wandb
+from wandb.keras import WandbCallback
+wandb.init(project="pqCnn")
+
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 from sklearn.metrics import f1_score
+import csv
 from Tidal import dao
 
 import numpy as np
-from sklearn.model_selection import train_test_split
 import pandas as pd
-import csv
-
 np.random.seed(1337)  # for reproducibility
-
-from keras.datasets import mnist
 from keras.utils import np_utils
 from keras.models import Sequential
-from keras.layers import SimpleRNN, Activation, Dense, LSTM
+from keras.layers import Dense, Activation, Convolution2D, MaxPooling2D, Flatten
 from keras.optimizers import Adam
+from sklearn.model_selection import train_test_split
 
-from sklearn.metrics import roc_auc_score
 
 import tensorflow as tf
 from keras import backend as K
@@ -54,88 +54,94 @@ def binary_PTA(y_true, y_pred, threshold=K.variable(value=0.5)):
     TP = K.sum(y_pred * y_true)
     return TP / P
 
+
 # 接着在模型的compile中设置metrics
-
-TIME_STEPS = 16     # same as the height of the image
-INPUT_SIZE = 2     # same as the width of the image
-BATCH_SIZE = 50
-BATCH_INDEX = 0
-OUTPUT_SIZE = 2
-CELL_SIZE = 50
-LR = 0.001
-
-# download the mnist to the path '~/.keras/datasets/' if it is the first time to be called
-# X shape (60,000 28x28), y shape (10,000, )
-#(X_train, y_train), (X_test, y_test) = mnist.load_data()
-
+# 如下例子，我用的是RNN做分类
 
 df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res\\resSam.csv', header=None)
 data_sample = np.array(df).astype(float)
 df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res\\resLabel.csv', header=None)
 data_label = np.array(df).astype(float)
-
-# df = pd.read_csv('E:\\G-1149\\trafficCon长短时记忆神经gestion\\训练数据\\trainData\\Sample15_1.csv', header=None)
-# data_sample = np.array(df).astype(float)
-# df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\label.csv', header=None)
-# data_label = np.array(df).astype(float)
-
-
 X_train, X_test, y_train, y_test = train_test_split(data_sample,data_label,test_size=0.3, random_state=0)
-print(X_train.size)
-print(y_train.size)
 
 # data pre-processing
-
-X_train = X_train.reshape(-1, 16, 2)/3      # normalize
-X_test = X_test.reshape(-1, 16, 2)/3      # normalize
+#-1是样本的个数，1是chanel,代表高度
+X_train = X_train.reshape(-1, 1,16, 2)/3.
+X_test = X_test.reshape(-1, 1,16, 2)/3.
 y_train = np_utils.to_categorical(y_train, num_classes=2)
 y_test = np_utils.to_categorical(y_test, num_classes=2)
 
-# build RNN model
+# Another way to build your CNN
 model = Sequential()
 
-# RNN cell
-# model.add(LSTM(
-#     # for batch_input_shape, if using tensorflow as the backend, we have to put None for the batch_size.
-#     # Otherwise, model.evaluate() will get error.
-#     batch_input_shape=(None, TIME_STEPS, INPUT_SIZE),       # Or: input_dim=INPUT_SIZE, input_length=TIME_STEPS,
-#     #output_dim=CELL_SIZE,
-#     unroll=True,
-#     units=CELL_SIZE
-# ))
+# Conv layer 1 output shape (32, 28, 28)
+model.add(Convolution2D(
+    batch_input_shape=(None, 1, 16, 2),
+    filters=16, #卷积核
+    kernel_size=2,
+    strides=1,
+    padding='same',     # Padding method
+    #data_format='channels_first',
+))
+model.add(Activation('relu'))
 
-model.add(SimpleRNN(
-    # for batch_input_shape, if using tensorflow as the backend, we have to put None for the batch_size.
-    # Otherwise, model.evaluate() will get error.
-    batch_input_shape=(None, TIME_STEPS, INPUT_SIZE),       # Or: input_dim=INPUT_SIZE, input_length=TIME_STEPS,
-    #output_dim=CELL_SIZE,
-    unroll=True,
-    units=CELL_SIZE
+# Pooling layer 1 (max pooling) output shape (32, 14, 14)
+model.add(MaxPooling2D(
+    pool_size=2,
+    strides=2,
+    padding='same',    # Padding method
+   # data_format='channels_first',
 ))
 
-# output layer
-model.add(Dense(OUTPUT_SIZE))
+# Conv layer 2 output shape (64, 14, 14)
+model.add(Convolution2D(64, 2, strides=1, padding='same'))#, data_format='channels_first'
+model.add(Activation('relu'))
+
+# Pooling layer 2 (max pooling) output shape (64, 7, 7)
+model.add(MaxPooling2D(2, 2, 'same'))#, data_format='channels_first'
+
+# Fully connected layer 1 input shape (64 * 7 * 7) = (3136), output shape (1024)
+model.add(Flatten())
+model.add(Dense(256))
+model.add(Activation('relu'))
+
+# Fully connected layer 2 to shape (10) for 10 classes
+model.add(Dense(2))
 model.add(Activation('softmax'))
 
-# optimizer
-adam = Adam(LR)
+# Another way to define your optimizer
+adam = Adam(lr=1e-4)
+
+# We add metrics to get more results you want to see
 model.compile(optimizer=adam,
               loss='categorical_crossentropy',
-              #metrics=[auc])
               metrics=['accuracy'])
+              #metrics=[auc])
 
-# training
-for step in range(4001):
-    # data shape = (batch_num, steps, inputs/outputs)
-    X_batch = X_train[BATCH_INDEX: BATCH_INDEX+BATCH_SIZE, :, :]
-    Y_batch = y_train[BATCH_INDEX: BATCH_INDEX+BATCH_SIZE, :]
-    cost = model.train_on_batch(X_batch, Y_batch)
-    BATCH_INDEX += BATCH_SIZE
-    BATCH_INDEX = 0 if BATCH_INDEX >= X_train.shape[0] else BATCH_INDEX
+print('Training ------------')
+# Another way to train the model
+#model.fit(X_train, y_train, epochs=200, batch_size=128,)
 
-    if step % 500 == 0:
-        cost, accuracy = model.evaluate(X_test, y_test, batch_size=y_test.shape[0], verbose=False)
-        print('test cost: ', cost, 'test accuracy: ', accuracy)
+history = model.fit(X_train, y_train, epochs=100, batch_size=128, callbacks=[WandbCallback()])
+
+acc = history.history['accuracy']
+loss = history.history['loss']
+epochs = range(1, len(acc) + 1)
+
+import matplotlib.pyplot as plt
+plt.title('Accuracy and Loss')
+plt.plot(epochs, acc, 'red', label='Training acc')
+plt.plot(epochs, loss, 'blue', label='Validation loss')
+plt.legend()
+plt.show()
+
+print('\nTesting ------------')
+# Evaluate the model with the metrics we defined earlier
+loss, accuracy = model.evaluate(X_test, y_test)
+
+print('\ntest loss: ', loss)
+
+print('\ntest accuracy: ', accuracy)
 
 y_pred = model.predict_classes(X_test)
 y_test_new = []
@@ -165,13 +171,17 @@ print('precision: ', precision_score(y_test_new, y_pred, average='micro'),' ', t
 print('recall: ', recall_score(y_test_new, y_pred, average='micro'),' ', tp/(tp+fn))
 print('f1: ', f1_score(y_test_new, y_pred, average='micro'),' ', 2*tp/(2*tp+fp+fn))
 
-#df = pd.read_csv('C:\\Users\\98259\\Desktop\\6.9学习相关文档\\样本数据\\fiftMin\\samplePeakHour_训练数据 - 副本Line.csv',header=None)
-df = pd.read_csv('data/test_4.csv', header=None)
-#df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\Sample15_1.csv', header=None)
+#df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\测试数据\\test.csv', header=None)
+#df = pd.read_csv('data/test_4.csv', header=None)
+df = pd.read_csv('C:\\Users\\98259\\Desktop\\6.9学习相关文档\\样本数据\\fiftMin\\samplePeakHour_训练数据 - 副本Line.csv',header=None)
 data_pre = np.array(df).astype(float)
-data_pre = data_pre.reshape(-1, 16, 2)/3
+data_pre = data_pre.reshape(-1, 1,16, 2)/3
 pre = model.predict_classes(data_pre)
 print(pre)
 dao.score(pre)
 
 print(model.summary())
+
+import os
+# Save model to wandb
+model.save(os.path.join(wandb.run.dir, "model.h1"))

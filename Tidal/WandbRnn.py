@@ -1,3 +1,9 @@
+from __future__ import print_function
+
+import wandb
+from wandb.keras import WandbCallback
+wandb.init(project="pq")
+
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
@@ -7,11 +13,9 @@ from Tidal import dao
 import numpy as np
 from sklearn.model_selection import train_test_split
 import pandas as pd
-import csv
 
 np.random.seed(1337)  # for reproducibility
 
-from keras.datasets import mnist
 from keras.utils import np_utils
 from keras.models import Sequential
 from keras.layers import SimpleRNN, Activation, Dense, LSTM
@@ -64,20 +68,10 @@ OUTPUT_SIZE = 2
 CELL_SIZE = 50
 LR = 0.001
 
-# download the mnist to the path '~/.keras/datasets/' if it is the first time to be called
-# X shape (60,000 28x28), y shape (10,000, )
-#(X_train, y_train), (X_test, y_test) = mnist.load_data()
-
-
 df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res\\resSam.csv', header=None)
 data_sample = np.array(df).astype(float)
 df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res\\resLabel.csv', header=None)
 data_label = np.array(df).astype(float)
-
-# df = pd.read_csv('E:\\G-1149\\trafficCon长短时记忆神经gestion\\训练数据\\trainData\\Sample15_1.csv', header=None)
-# data_sample = np.array(df).astype(float)
-# df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\label.csv', header=None)
-# data_label = np.array(df).astype(float)
 
 
 X_train, X_test, y_train, y_test = train_test_split(data_sample,data_label,test_size=0.3, random_state=0)
@@ -95,22 +89,12 @@ y_test = np_utils.to_categorical(y_test, num_classes=2)
 model = Sequential()
 
 # RNN cell
-# model.add(LSTM(
-#     # for batch_input_shape, if using tensorflow as the backend, we have to put None for the batch_size.
-#     # Otherwise, model.evaluate() will get error.
-#     batch_input_shape=(None, TIME_STEPS, INPUT_SIZE),       # Or: input_dim=INPUT_SIZE, input_length=TIME_STEPS,
-#     #output_dim=CELL_SIZE,
-#     unroll=True,
-#     units=CELL_SIZE
-# ))
-
-model.add(SimpleRNN(
+model.add(LSTM(
     # for batch_input_shape, if using tensorflow as the backend, we have to put None for the batch_size.
     # Otherwise, model.evaluate() will get error.
     batch_input_shape=(None, TIME_STEPS, INPUT_SIZE),       # Or: input_dim=INPUT_SIZE, input_length=TIME_STEPS,
-    #output_dim=CELL_SIZE,
+    output_dim=CELL_SIZE,
     unroll=True,
-    units=CELL_SIZE
 ))
 
 # output layer
@@ -134,8 +118,10 @@ for step in range(4001):
     BATCH_INDEX = 0 if BATCH_INDEX >= X_train.shape[0] else BATCH_INDEX
 
     if step % 500 == 0:
-        cost, accuracy = model.evaluate(X_test, y_test, batch_size=y_test.shape[0], verbose=False)
+        # Log metrics with wandb
+        cost, accuracy = model.evaluate(X_test, y_test, batch_size=y_test.shape[0], verbose=False, callbacks=[WandbCallback()])
         print('test cost: ', cost, 'test accuracy: ', accuracy)
+
 
 y_pred = model.predict_classes(X_test)
 y_test_new = []
@@ -165,9 +151,7 @@ print('precision: ', precision_score(y_test_new, y_pred, average='micro'),' ', t
 print('recall: ', recall_score(y_test_new, y_pred, average='micro'),' ', tp/(tp+fn))
 print('f1: ', f1_score(y_test_new, y_pred, average='micro'),' ', 2*tp/(2*tp+fp+fn))
 
-#df = pd.read_csv('C:\\Users\\98259\\Desktop\\6.9学习相关文档\\样本数据\\fiftMin\\samplePeakHour_训练数据 - 副本Line.csv',header=None)
 df = pd.read_csv('data/test_4.csv', header=None)
-#df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\Sample15_1.csv', header=None)
 data_pre = np.array(df).astype(float)
 data_pre = data_pre.reshape(-1, 16, 2)/3
 pre = model.predict_classes(data_pre)
@@ -175,3 +159,7 @@ print(pre)
 dao.score(pre)
 
 print(model.summary())
+
+import os
+# Save model to wandb
+model.save(os.path.join(wandb.run.dir, "model.h5"))

@@ -1,0 +1,8 @@
+55328
+1729
+D:/pangqian/python/tidalDetect/Tidal/visualFile.py:140: UserWarning: Update your `SimpleRNN` call to the Keras 2 API: `SimpleRNN(batch_input_shape=(None, 16,..., unroll=True, units=50)`
+  unroll=True,
+Traceback (most recent call last):
+  File "D:/pangqian/python/tidalDetect/Tidal/visualFile.py", line 160, in <module>
+    cost = model.train_on_batch(X_batch, Y_batch, callbacks=[history])
+TypeError: train_on_batch() got an unexpected keyword argument 'callbacks'

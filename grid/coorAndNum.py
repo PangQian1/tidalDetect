@@ -5,7 +5,7 @@
 import csv
 import config
 
-def numToCoor(gridTidalPath, bjTopologyPath,  gridPoiPath, outPath):
+def numToCoor(gridTidalPath, bjTopologyPath,  gridPoiPath, outPath, date):
     #link 和 name 对应字典
     nameDict = {}
     with open(bjTopologyPath, 'r') as file:
@@ -42,7 +42,8 @@ def numToCoor(gridTidalPath, bjTopologyPath,  gridPoiPath, outPath):
                     name = nameDict[r[i]]
                     if(name not in nameList):
                         nameList.append(name)
-            csv_writer.writerow([x, y,coorDict[r[0]] , '-'.join(nameList)])
+            temp = coorDict[r[0]].split(':')
+            csv_writer.writerow([num, x, y, temp[0], temp[1], '-'.join(nameList), date])
 
     f.close()
 
@@ -50,11 +51,11 @@ def numToCoor(gridTidalPath, bjTopologyPath,  gridPoiPath, outPath):
 if __name__ == '__main__':
 
     #读文件
-    gridTidalPath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridTidal_rnn_new13.csv'
+    gridTidalPath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridTidal_rnn_new15.csv'
     bjTopologyPath = "E:/G-1149/trafficCongestion/bjTopology.csv"
     gridPoiPath = 'E:/G-1149/trafficCongestion/网格化/gridPoi.csv'
 
     #写文件
-    coorPath = 'E:/G-1149/trafficCongestion/网格化/tidal/coordinate_new13.csv'
+    coorPath = 'E:/G-1149/trafficCongestion/网格化/tidal/coordinate_new15.csv'
 
-    numToCoor(gridTidalPath, bjTopologyPath,  gridPoiPath, coorPath)
+    numToCoor(gridTidalPath, bjTopologyPath,  gridPoiPath, coorPath, '2019-06-15')

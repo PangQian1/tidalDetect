@@ -1,0 +1,57 @@
+2020-12-04 10:59:19,257 INFO    MainThread:19040 [wandb_setup.py:_flush():70] setting env: {}
+2020-12-04 10:59:19,257 INFO    MainThread:19040 [wandb_setup.py:_flush():70] multiprocessing start_methods=spawn
+2020-12-04 10:59:19,257 INFO    MainThread:19040 [wandb_setup.py:_flush():70] setting login settings: {}
+2020-12-04 10:59:19,258 INFO    MainThread:19040 [wandb_init.py:_log_setup():303] Logging user logs to D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_105919-34verkbl\logs\debug.log
+2020-12-04 10:59:19,259 INFO    MainThread:19040 [wandb_init.py:_log_setup():304] Logging internal logs to D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_105919-34verkbl\logs\debug-internal.log
+2020-12-04 10:59:31,624 INFO    MainThread:19040 [wandb_run.py:_console_start():1218] atexit reg
+2020-12-04 10:59:31,642 INFO    MainThread:19040 [wandb_run.py:_redirect():1085] redirect: SettingsConsole.WRAP
+2020-12-04 10:59:31,643 INFO    MainThread:19040 [wandb_run.py:_redirect():1116] Wrapping output streams.
+2020-12-04 10:59:31,643 INFO    MainThread:19040 [wandb_run.py:_redirect():1132] Redirects installed.
+2020-12-04 10:59:46,469 INFO    MainThread:19040 [wandb_run.py:_atexit_cleanup():1188] got exitcode: 0
+2020-12-04 10:59:46,470 INFO    MainThread:19040 [wandb_run.py:_restore():1160] restore
+2020-12-04 10:59:46,473 INFO    MainThread:19040 [wandb_run.py:_wait_for_finish():1305] got exit ret: uuid: "89b1a94df5ed4630ac9d21bc88d52a4b"
+response {
+  poll_exit_response {
+    file_counts {
+      wandb_count: 1
+    }
+    pusher_stats {
+      uploaded_bytes: 817
+      total_bytes: 817
+    }
+  }
+}
+
+2020-12-04 10:59:48,490 INFO    MainThread:19040 [wandb_run.py:_wait_for_finish():1305] got exit ret: uuid: "1cf9a2c531634493af0e90aa105dbf4f"
+response {
+  poll_exit_response {
+    file_counts {
+      wandb_count: 5
+      other_count: 1
+    }
+    pusher_stats {
+      uploaded_bytes: 60782
+      total_bytes: 60782
+    }
+  }
+}
+
+2020-12-04 10:59:50,494 INFO    MainThread:19040 [wandb_run.py:_wait_for_finish():1305] got exit ret: uuid: "348babd2702b4a2ebeb4b4f775918df2"
+response {
+  poll_exit_response {
+    done: true
+    exit_result {
+    }
+    file_counts {
+      wandb_count: 5
+      other_count: 1
+    }
+    pusher_stats {
+      uploaded_bytes: 60782
+      total_bytes: 60782
+    }
+  }
+}
+
+2020-12-04 10:59:51,752 INFO    MainThread:19040 [wandb_run.py:_show_files():1517] logging synced files
+2020-12-04 10:59:51,753 INFO    MainThread:19040 [internal.py:handle_exit():138] Internal process exited

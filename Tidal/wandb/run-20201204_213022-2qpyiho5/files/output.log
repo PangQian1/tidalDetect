@@ -1,0 +1,43 @@
+Using TensorFlow backend.
+wandb: WARNING Keras version 2.3.1 is not fully supported. Required keras >= 2.4.0
+55328
+1729
+D:/pangqian/python/tidalDetect/Tidal/WandbRnn.py:97: UserWarning: Update your `SimpleRNN` call to the Keras 2 API: `SimpleRNN(batch_input_shape=(None, 16,..., unroll=True, units=50)`
+  unroll=True,
+test cost:  0.7057156562805176 test accuracy:  0.5033738017082214
+test cost:  0.06594156473875046 test accuracy:  0.9824561476707458
+test cost:  0.04357165843248367 test accuracy:  0.9892037510871887
+test cost:  0.046470969915390015 test accuracy:  0.9824561476707458
+test cost:  0.047647468745708466 test accuracy:  0.9811066389083862
+test cost:  0.04223455861210823 test accuracy:  0.9865047335624695
+test cost:  0.052933283150196075 test accuracy:  0.9811066389083862
+test cost:  0.04732459411025047 test accuracy:  0.9811066389083862
+test cost:  0.0413433201611042 test accuracy:  0.9851552248001099
+tp  351  fn  7  fp  4  tn  379
+accuracy:  0.9851551956815114   0.9851551956815114
+precision:  0.9851551956815114   0.9887323943661972
+recall:  0.9851551956815114   0.9804469273743017
+f1:  0.9851551956815114   0.9845722300140253
+[1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 0 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 1 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 1 1 1 1]
+tp  23  fn  2  fp  4  tn  71
+accuracy:  0.94
+precision:  0.8518518518518519
+recall:  0.92
+f1:  0.8846153846153846
+Model: "sequential_1"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+simple_rnn_1 (SimpleRNN)     (None, 50)                2650      
+_________________________________________________________________
+dense_1 (Dense)              (None, 2)                 102       
+_________________________________________________________________
+activation_1 (Activation)    (None, 2)                 0         
+=================================================================
+Total params: 2,752
+Trainable params: 2,752
+Non-trainable params: 0
+_________________________________________________________________
+None

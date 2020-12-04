@@ -1,0 +1,236 @@
+2020-12-04 23:06:28,031 INFO    MainThread:1636 [internal.py:wandb_internal():63] W&B internal server running at pid: 1636
+2020-12-04 23:06:28,033 INFO    WriterThread:1636 [datastore.py:open_for_write():76] open: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\run-256rktay.wandb
+2020-12-04 23:06:28,034 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: check_version
+2020-12-04 23:06:28,035 DEBUG   SenderThread:1636 [sender.py:send():90] send: header
+2020-12-04 23:06:28,035 DEBUG   SenderThread:1636 [sender.py:send():90] send: request
+2020-12-04 23:06:28,035 DEBUG   SenderThread:1636 [sender.py:send_request():99] send_request: check_version
+2020-12-04 23:06:28,038 DEBUG   Thread-8  :1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): pypi.org:443
+2020-12-04 23:06:28,831 DEBUG   Thread-8  :1636 [connectionpool.py:_make_request():437] https://pypi.org:443 "GET /pypi/wandb/json HTTP/1.1" 200 52216
+2020-12-04 23:06:29,206 DEBUG   SenderThread:1636 [sender.py:send():90] send: run
+2020-12-04 23:06:29,217 DEBUG   SenderThread:1636 [util.py:is_cygwin_git():314] Failed checking if running in CYGWIN due to: FileNotFoundError(2, '系统找不到指定的文件。', None, 2, None)
+2020-12-04 23:06:29,222 DEBUG   SenderThread:1636 [cmd.py:execute():719] Popen(['git', 'cat-file', '--batch-check'], cwd=D:\pangqian\python\tidalDetect, universal_newlines=False, shell=None, istream=<valid stream>)
+2020-12-04 23:06:29,273 DEBUG   SenderThread:1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+2020-12-04 23:06:29,667 DEBUG   SenderThread:1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2020-12-04 23:06:29,752 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: run_start
+2020-12-04 23:06:29,759 INFO    SenderThread:1636 [dir_watcher.py:__init__():165] watching files in: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files
+2020-12-04 23:06:29,759 INFO    SenderThread:1636 [sender.py:_start_run_threads():490] run started: 256rktay with start time 1607094386
+2020-12-04 23:06:29,759 DEBUG   SenderThread:1636 [sender.py:send():90] send: summary
+2020-12-04 23:06:29,760 INFO    SenderThread:1636 [sender.py:_save_file():568] saving file wandb-summary.json with policy end
+2020-12-04 23:06:30,027 DEBUG   HandlerThread:1636 [cmd.py:execute():719] Popen(['git', 'cat-file', '--batch-check'], cwd=D:\pangqian\python\tidalDetect, universal_newlines=False, shell=None, istream=<valid stream>)
+2020-12-04 23:06:30,081 DEBUG   HandlerThread:1636 [cmd.py:execute():719] Popen(['git', 'rev-parse', '--show-toplevel'], cwd=D:\pangqian\python\tidalDetect, universal_newlines=False, shell=None, istream=None)
+2020-12-04 23:06:30,295 DEBUG   SenderThread:1636 [sender.py:send():90] send: files
+2020-12-04 23:06:30,295 INFO    SenderThread:1636 [sender.py:_save_file():568] saving file wandb-metadata.json with policy now
+2020-12-04 23:06:30,295 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: status
+2020-12-04 23:06:30,296 DEBUG   SenderThread:1636 [sender.py:send():90] send: request
+2020-12-04 23:06:30,296 DEBUG   SenderThread:1636 [sender.py:send_request():99] send_request: status
+2020-12-04 23:06:30,301 DEBUG   SenderThread:1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+2020-12-04 23:06:30,326 DEBUG   Thread-17 :1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+2020-12-04 23:06:30,719 DEBUG   SenderThread:1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2020-12-04 23:06:30,728 DEBUG   Thread-17 :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2020-12-04 23:06:30,743 DEBUG   Thread-17 :1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): storage.googleapis.com:443
+2020-12-04 23:06:30,768 INFO    Thread-12 :1636 [dir_watcher.py:_on_file_created():213] file/dir created: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\wandb-metadata.json
+2020-12-04 23:06:30,768 INFO    Thread-12 :1636 [dir_watcher.py:_on_file_created():213] file/dir created: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\requirements.txt
+2020-12-04 23:06:30,769 INFO    Thread-12 :1636 [dir_watcher.py:_on_file_created():213] file/dir created: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\output.log
+2020-12-04 23:06:30,771 INFO    Thread-12 :1636 [dir_watcher.py:_on_file_created():213] file/dir created: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\wandb-summary.json
+2020-12-04 23:06:31,307 DEBUG   Thread-17 :1636 [connectionpool.py:_make_request():437] https://storage.googleapis.com:443 "PUT /wandb-production.appspot.com/pangqian/pq/256rktay/wandb-metadata.json?Expires=1607180791&GoogleAccessId=wandb-production%40appspot.gserviceaccount.com&Signature=UnC8AXZjHITp5wnc1%2FwG%2BxnApOe%2Ba0DYTRrzNbv525oD6gLuzyUMv6JJFc3e2GEZYENC%2BN3Cg1R8fEotj6wDPflrIqCSZM1%2FTtsAgpThPznhh83%2BJwDSAX2GTiBbUrhSxh0XeRkMrNm6Q2czKiYXmajkwy1WU%2FqPvB0KamV%2Fzbxm707uWpyvovLsuAbePcdw8jR9%2B3LOzPOzLDB3ajc4OgiRc4zvX1NCA8RbvNpl3K2JXsR8LiICt7lJos9JPfslUMyGOICWXzbKwmEmv9HCZvuysEjNxlvzPTh1WjxKIy4ydy5dpynbbpQZZj0X4eoz7p6C%2BwWHsq7M3TYxZkLIxA%3D%3D HTTP/1.1" 200 0
+2020-12-04 23:06:31,311 INFO    Thread-17 :1636 [upload_job.py:push():131] Uploaded file C:\Users\98259\AppData\Local\Temp\tmptpkmtjr7wandb\1rcwh066-wandb-metadata.json
+2020-12-04 23:06:31,761 INFO    Thread-12 :1636 [dir_watcher.py:_on_file_modified():226] file/dir modified: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\output.log
+2020-12-04 23:06:33,226 DEBUG   Thread-9  :1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+2020-12-04 23:06:33,561 DEBUG   SenderThread:1636 [sender.py:send():90] send: stats
+2020-12-04 23:06:33,670 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:06:35,946 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:06:36,585 DEBUG   SenderThread:1636 [sender.py:send():90] send: files
+2020-12-04 23:06:36,586 INFO    SenderThread:1636 [sender.py:_save_file():568] saving file model-best.h5 with policy live
+2020-12-04 23:06:36,586 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: get_summary
+2020-12-04 23:06:37,766 INFO    Thread-12 :1636 [dir_watcher.py:_on_file_modified():226] file/dir modified: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\output.log
+2020-12-04 23:06:38,146 DEBUG   SenderThread:1636 [sender.py:send():90] send: stats
+2020-12-04 23:06:38,409 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:06:42,052 DEBUG   SenderThread:1636 [sender.py:send():90] send: files
+2020-12-04 23:06:42,052 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: get_summary
+2020-12-04 23:06:42,052 INFO    SenderThread:1636 [sender.py:_save_file():568] saving file model-best.h5 with policy live
+2020-12-04 23:06:42,352 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:06:42,787 INFO    Thread-12 :1636 [dir_watcher.py:_on_file_modified():226] file/dir modified: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\output.log
+2020-12-04 23:06:42,881 DEBUG   SenderThread:1636 [sender.py:send():90] send: stats
+2020-12-04 23:06:45,174 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:06:45,815 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: status
+2020-12-04 23:06:45,823 DEBUG   SenderThread:1636 [sender.py:send():90] send: request
+2020-12-04 23:06:45,823 DEBUG   SenderThread:1636 [sender.py:send_request():99] send_request: status
+2020-12-04 23:06:45,830 DEBUG   SenderThread:1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+2020-12-04 23:06:46,280 DEBUG   SenderThread:1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2020-12-04 23:06:49,562 DEBUG   SenderThread:1636 [sender.py:send():90] send: stats
+2020-12-04 23:06:50,031 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: get_summary
+2020-12-04 23:06:50,032 DEBUG   SenderThread:1636 [sender.py:send():90] send: files
+2020-12-04 23:06:50,032 INFO    SenderThread:1636 [sender.py:_save_file():568] saving file model-best.h5 with policy live
+2020-12-04 23:06:50,166 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:06:50,583 INFO    Thread-12 :1636 [dir_watcher.py:_on_file_modified():226] file/dir modified: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\output.log
+2020-12-04 23:06:52,679 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:06:54,908 DEBUG   SenderThread:1636 [sender.py:send():90] send: stats
+2020-12-04 23:06:55,243 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:06:57,893 DEBUG   SenderThread:1636 [sender.py:send():90] send: files
+2020-12-04 23:06:57,895 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: get_summary
+2020-12-04 23:06:57,897 INFO    SenderThread:1636 [sender.py:_save_file():568] saving file model-best.h5 with policy live
+2020-12-04 23:06:58,243 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:06:58,626 INFO    Thread-12 :1636 [dir_watcher.py:_on_file_modified():226] file/dir modified: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\output.log
+2020-12-04 23:06:59,782 DEBUG   SenderThread:1636 [sender.py:send():90] send: stats
+2020-12-04 23:07:01,286 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: status
+2020-12-04 23:07:01,287 DEBUG   SenderThread:1636 [sender.py:send():90] send: request
+2020-12-04 23:07:01,287 DEBUG   SenderThread:1636 [sender.py:send_request():99] send_request: status
+2020-12-04 23:07:01,292 DEBUG   SenderThread:1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+2020-12-04 23:07:01,748 DEBUG   SenderThread:1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2020-12-04 23:07:02,125 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:07:03,354 DEBUG   SenderThread:1636 [sender.py:send():90] send: files
+2020-12-04 23:07:03,355 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: get_summary
+2020-12-04 23:07:03,355 INFO    SenderThread:1636 [sender.py:_save_file():568] saving file model-best.h5 with policy live
+2020-12-04 23:07:03,641 INFO    Thread-12 :1636 [dir_watcher.py:_on_file_modified():226] file/dir modified: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\output.log
+2020-12-04 23:07:04,441 DEBUG   SenderThread:1636 [sender.py:send():90] send: stats
+2020-12-04 23:07:04,726 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:07:08,182 DEBUG   SenderThread:1636 [sender.py:send():90] send: files
+2020-12-04 23:07:08,183 INFO    SenderThread:1636 [sender.py:_save_file():568] saving file model-best.h5 with policy live
+2020-12-04 23:07:08,184 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: get_summary
+2020-12-04 23:07:08,639 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:07:08,652 INFO    Thread-12 :1636 [dir_watcher.py:_on_file_modified():226] file/dir modified: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\output.log
+2020-12-04 23:07:09,154 DEBUG   SenderThread:1636 [sender.py:send():90] send: stats
+2020-12-04 23:07:11,448 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:07:12,659 DEBUG   SenderThread:1636 [sender.py:send():90] send: files
+2020-12-04 23:07:12,660 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: get_summary
+2020-12-04 23:07:12,660 INFO    SenderThread:1636 [sender.py:_save_file():568] saving file model-best.h5 with policy live
+2020-12-04 23:07:13,664 INFO    Thread-12 :1636 [dir_watcher.py:_on_file_modified():226] file/dir modified: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\output.log
+2020-12-04 23:07:13,775 DEBUG   SenderThread:1636 [sender.py:send():90] send: stats
+2020-12-04 23:07:14,042 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:07:16,758 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: status
+2020-12-04 23:07:16,759 DEBUG   SenderThread:1636 [sender.py:send():90] send: request
+2020-12-04 23:07:16,759 DEBUG   SenderThread:1636 [sender.py:send_request():99] send_request: status
+2020-12-04 23:07:16,764 DEBUG   SenderThread:1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+2020-12-04 23:07:17,144 DEBUG   SenderThread:1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2020-12-04 23:07:17,814 DEBUG   SenderThread:1636 [sender.py:send():90] send: files
+2020-12-04 23:07:17,814 INFO    SenderThread:1636 [sender.py:_save_file():568] saving file model-best.h5 with policy live
+2020-12-04 23:07:17,815 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: get_summary
+2020-12-04 23:07:18,124 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:07:18,611 DEBUG   SenderThread:1636 [sender.py:send():90] send: stats
+2020-12-04 23:07:18,678 INFO    Thread-12 :1636 [dir_watcher.py:_on_file_modified():226] file/dir modified: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\output.log
+2020-12-04 23:07:20,914 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:07:23,364 DEBUG   SenderThread:1636 [sender.py:send():90] send: stats
+2020-12-04 23:07:23,465 DEBUG   SenderThread:1636 [sender.py:send():90] send: files
+2020-12-04 23:07:23,466 INFO    SenderThread:1636 [sender.py:_save_file():568] saving file model-best.h5 with policy live
+2020-12-04 23:07:23,466 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: get_summary
+2020-12-04 23:07:23,645 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:07:23,687 INFO    Thread-12 :1636 [dir_watcher.py:_on_file_modified():226] file/dir modified: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\output.log
+2020-12-04 23:07:24,338 DEBUG   SenderThread:1636 [sender.py:send():90] send: exit
+2020-12-04 23:07:24,339 INFO    SenderThread:1636 [sender.py:send_exit():168] handling exit code: 0
+2020-12-04 23:07:24,339 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: poll_exit
+2020-12-04 23:07:24,340 INFO    SenderThread:1636 [sender.py:send_exit():176] send defer
+2020-12-04 23:07:24,340 DEBUG   SenderThread:1636 [sender.py:send():90] send: request
+2020-12-04 23:07:24,341 DEBUG   SenderThread:1636 [sender.py:send_request():99] send_request: poll_exit
+2020-12-04 23:07:24,342 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: defer
+2020-12-04 23:07:24,342 INFO    HandlerThread:1636 [handler.py:handle_request_defer():69] handle defer: 0
+2020-12-04 23:07:24,342 DEBUG   SenderThread:1636 [sender.py:send():90] send: request
+2020-12-04 23:07:24,342 DEBUG   SenderThread:1636 [sender.py:send_request():99] send_request: defer
+2020-12-04 23:07:24,342 INFO    SenderThread:1636 [sender.py:send_request_defer():185] handle sender defer: 0
+2020-12-04 23:07:24,343 INFO    SenderThread:1636 [sender.py:send_request_defer():221] send defer: 1
+2020-12-04 23:07:24,344 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: defer
+2020-12-04 23:07:24,344 INFO    HandlerThread:1636 [handler.py:handle_request_defer():69] handle defer: 1
+2020-12-04 23:07:24,391 DEBUG   SenderThread:1636 [sender.py:send():90] send: request
+2020-12-04 23:07:24,391 DEBUG   SenderThread:1636 [sender.py:send_request():99] send_request: defer
+2020-12-04 23:07:24,391 INFO    SenderThread:1636 [sender.py:send_request_defer():185] handle sender defer: 1
+2020-12-04 23:07:24,392 INFO    SenderThread:1636 [sender.py:send_request_defer():221] send defer: 2
+2020-12-04 23:07:24,392 DEBUG   SenderThread:1636 [sender.py:send():90] send: stats
+2020-12-04 23:07:24,393 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: defer
+2020-12-04 23:07:24,393 INFO    HandlerThread:1636 [handler.py:handle_request_defer():69] handle defer: 2
+2020-12-04 23:07:24,393 DEBUG   SenderThread:1636 [sender.py:send():90] send: request
+2020-12-04 23:07:24,394 DEBUG   SenderThread:1636 [sender.py:send_request():99] send_request: defer
+2020-12-04 23:07:24,394 INFO    SenderThread:1636 [sender.py:send_request_defer():185] handle sender defer: 2
+2020-12-04 23:07:24,394 INFO    SenderThread:1636 [sender.py:send_request_defer():221] send defer: 3
+2020-12-04 23:07:24,394 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: defer
+2020-12-04 23:07:24,395 INFO    HandlerThread:1636 [handler.py:handle_request_defer():69] handle defer: 3
+2020-12-04 23:07:24,395 DEBUG   SenderThread:1636 [sender.py:send():90] send: summary
+2020-12-04 23:07:24,395 INFO    SenderThread:1636 [sender.py:_save_file():568] saving file wandb-summary.json with policy end
+2020-12-04 23:07:24,396 DEBUG   SenderThread:1636 [sender.py:send():90] send: request
+2020-12-04 23:07:24,396 DEBUG   SenderThread:1636 [sender.py:send_request():99] send_request: defer
+2020-12-04 23:07:24,396 INFO    SenderThread:1636 [sender.py:send_request_defer():185] handle sender defer: 3
+2020-12-04 23:07:24,396 INFO    SenderThread:1636 [sender.py:send_request_defer():221] send defer: 4
+2020-12-04 23:07:24,396 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: defer
+2020-12-04 23:07:24,396 INFO    HandlerThread:1636 [handler.py:handle_request_defer():69] handle defer: 4
+2020-12-04 23:07:24,396 DEBUG   SenderThread:1636 [sender.py:send():90] send: request
+2020-12-04 23:07:24,397 DEBUG   SenderThread:1636 [sender.py:send_request():99] send_request: defer
+2020-12-04 23:07:24,397 INFO    SenderThread:1636 [sender.py:send_request_defer():185] handle sender defer: 4
+2020-12-04 23:07:24,397 INFO    SenderThread:1636 [dir_watcher.py:finish():279] shutting down directory watcher
+2020-12-04 23:07:24,687 INFO    Thread-12 :1636 [dir_watcher.py:_on_file_modified():226] file/dir modified: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\output.log
+2020-12-04 23:07:24,688 INFO    SenderThread:1636 [dir_watcher.py:_on_file_modified():226] file/dir modified: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\wandb-summary.json
+2020-12-04 23:07:24,688 INFO    SenderThread:1636 [dir_watcher.py:_on_file_created():213] file/dir created: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\model.h5
+2020-12-04 23:07:24,689 INFO    SenderThread:1636 [dir_watcher.py:finish():309] scan: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files
+2020-12-04 23:07:24,691 INFO    SenderThread:1636 [dir_watcher.py:finish():315] scan save: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\config.yaml config.yaml
+2020-12-04 23:07:24,693 INFO    SenderThread:1636 [dir_watcher.py:finish():315] scan save: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\model.h5 model.h5
+2020-12-04 23:07:24,694 INFO    SenderThread:1636 [dir_watcher.py:finish():315] scan save: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\output.log output.log
+2020-12-04 23:07:24,702 INFO    SenderThread:1636 [dir_watcher.py:finish():315] scan save: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\requirements.txt requirements.txt
+2020-12-04 23:07:24,702 DEBUG   Thread-18 :1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+2020-12-04 23:07:24,702 DEBUG   Thread-19 :1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+2020-12-04 23:07:24,703 INFO    SenderThread:1636 [dir_watcher.py:finish():315] scan save: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\wandb-metadata.json wandb-metadata.json
+2020-12-04 23:07:24,703 INFO    SenderThread:1636 [dir_watcher.py:finish():315] scan save: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\wandb-summary.json wandb-summary.json
+2020-12-04 23:07:24,713 INFO    SenderThread:1636 [sender.py:send_request_defer():221] send defer: 5
+2020-12-04 23:07:24,714 DEBUG   Thread-20 :1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+2020-12-04 23:07:24,716 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: defer
+2020-12-04 23:07:24,716 DEBUG   Thread-21 :1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+2020-12-04 23:07:24,720 INFO    HandlerThread:1636 [handler.py:handle_request_defer():69] handle defer: 5
+2020-12-04 23:07:24,721 DEBUG   Thread-22 :1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): api.wandb.ai:443
+2020-12-04 23:07:24,721 DEBUG   SenderThread:1636 [sender.py:send():90] send: request
+2020-12-04 23:07:24,722 DEBUG   SenderThread:1636 [sender.py:send_request():99] send_request: defer
+2020-12-04 23:07:24,722 INFO    SenderThread:1636 [sender.py:send_request_defer():185] handle sender defer: 5
+2020-12-04 23:07:24,722 INFO    SenderThread:1636 [file_pusher.py:finish():169] shutting down file pusher
+2020-12-04 23:07:24,722 INFO    SenderThread:1636 [sender.py:send_request_defer():221] send defer: 6
+2020-12-04 23:07:24,723 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: defer
+2020-12-04 23:07:24,724 INFO    HandlerThread:1636 [handler.py:handle_request_defer():69] handle defer: 6
+2020-12-04 23:07:24,724 DEBUG   SenderThread:1636 [sender.py:send():90] send: request
+2020-12-04 23:07:24,725 DEBUG   SenderThread:1636 [sender.py:send_request():99] send_request: defer
+2020-12-04 23:07:24,725 INFO    SenderThread:1636 [sender.py:send_request_defer():185] handle sender defer: 6
+2020-12-04 23:07:25,016 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:07:25,107 DEBUG   Thread-18 :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2020-12-04 23:07:25,115 DEBUG   Thread-19 :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2020-12-04 23:07:25,117 DEBUG   Thread-18 :1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): storage.googleapis.com:443
+2020-12-04 23:07:25,134 DEBUG   Thread-19 :1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): storage.googleapis.com:443
+2020-12-04 23:07:25,206 DEBUG   Thread-22 :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2020-12-04 23:07:25,212 DEBUG   Thread-21 :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2020-12-04 23:07:25,220 DEBUG   Thread-22 :1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): storage.googleapis.com:443
+2020-12-04 23:07:25,223 DEBUG   Thread-21 :1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): storage.googleapis.com:443
+2020-12-04 23:07:25,226 DEBUG   Thread-20 :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2020-12-04 23:07:25,239 DEBUG   Thread-20 :1636 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): storage.googleapis.com:443
+2020-12-04 23:07:25,264 DEBUG   Thread-9  :1636 [connectionpool.py:_make_request():437] https://api.wandb.ai:443 "POST /files/pangqian/pq/256rktay/file_stream HTTP/1.1" 200 None
+2020-12-04 23:07:25,268 INFO    SenderThread:1636 [sender.py:send_request_defer():221] send defer: 7
+2020-12-04 23:07:25,269 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: defer
+2020-12-04 23:07:25,269 INFO    HandlerThread:1636 [handler.py:handle_request_defer():69] handle defer: 7
+2020-12-04 23:07:25,269 DEBUG   SenderThread:1636 [sender.py:send():90] send: request
+2020-12-04 23:07:25,269 DEBUG   SenderThread:1636 [sender.py:send_request():99] send_request: defer
+2020-12-04 23:07:25,269 INFO    SenderThread:1636 [sender.py:send_request_defer():185] handle sender defer: 7
+2020-12-04 23:07:25,269 INFO    SenderThread:1636 [sender.py:send_request_defer():221] send defer: 8
+2020-12-04 23:07:25,270 DEBUG   SenderThread:1636 [sender.py:send():90] send: final
+2020-12-04 23:07:25,271 DEBUG   SenderThread:1636 [sender.py:send():90] send: footer
+2020-12-04 23:07:25,271 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: defer
+2020-12-04 23:07:25,271 INFO    HandlerThread:1636 [handler.py:handle_request_defer():69] handle defer: 8
+2020-12-04 23:07:25,272 DEBUG   SenderThread:1636 [sender.py:send():90] send: request
+2020-12-04 23:07:25,272 DEBUG   SenderThread:1636 [sender.py:send_request():99] send_request: defer
+2020-12-04 23:07:25,272 INFO    SenderThread:1636 [sender.py:send_request_defer():185] handle sender defer: 8
+2020-12-04 23:07:25,654 DEBUG   Thread-18 :1636 [connectionpool.py:_make_request():437] https://storage.googleapis.com:443 "PUT /wandb-production.appspot.com/pangqian/pq/256rktay/config.yaml?Expires=1607180845&GoogleAccessId=wandb-production%40appspot.gserviceaccount.com&Signature=Q0TZ3eDk19jXQsrd%2BG1wW%2FDKNT1DUt9F6ZCq6CKnfnnT4YHIQoR7e%2F%2BtlE9Al%2FWHNTiaEOapvtd6KPzPY7nuHU0JE5SHeFlCsDtBnnLDNlExEKPffB%2FFLW1yhhP4B%2Bu7epz%2FOaCqg9lYT741gDMP%2BxDoTy6x2GV0jC5EGHBj9%2BhXkiUa58vGP96UX3OCbWYunXPwSaAaby55Ogopqi4kwNBF0sGI7FNdpsX4OxZ3AHWrVZCQK2Ymk1uE9WfA7eMq08WUbT0v8qsG%2Blin14pwipXxWR%2FDNAv2vvxw7YPJdI9QUhXMZbmCVgKq4M%2BpPRTaQw2qpk6tW5AL%2FzswTXGiww%3D%3D HTTP/1.1" 200 0
+2020-12-04 23:07:25,657 INFO    Thread-18 :1636 [upload_job.py:push():131] Uploaded file D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\config.yaml
+2020-12-04 23:07:25,875 DEBUG   Thread-22 :1636 [connectionpool.py:_make_request():437] https://storage.googleapis.com:443 "PUT /wandb-production.appspot.com/pangqian/pq/256rktay/wandb-summary.json?Expires=1607180845&GoogleAccessId=wandb-production%40appspot.gserviceaccount.com&Signature=aqjSIVPKo8H9DFlQLrnpjF5miXHQeTLVBTpLM7f30ImBg%2F647CxrvBjfafTQIHgD%2Biogrrhoph5qG7f9S08W7P%2F%2F08pLDVfs%2BVEMUrtgJr4qb05mWnt1cimP47qoeB2I0svvRBw08sPShMdF2j8ISnYtxvPBH3Kbtl1%2BbPJXFH6OShCcHl7nQiCxdjR%2FjOZ2r3%2Fhqz9TcgRn2J26GaDbZGXrWAii2CX%2F21NtfRXNeezzV2%2FSvraCvL2oArT1QcL%2BnRnPJoaOiyXAee8skmWeM7FbeGGiSLzhObJ8l%2Baaqez0GjxQgsBn6AAUMT5Duk%2FcJ1ruwBKdxBIpnKSIXDYAjQ%3D%3D HTTP/1.1" 200 0
+2020-12-04 23:07:25,877 DEBUG   Thread-21 :1636 [connectionpool.py:_make_request():437] https://storage.googleapis.com:443 "PUT /wandb-production.appspot.com/pangqian/pq/256rktay/requirements.txt?Expires=1607180845&GoogleAccessId=wandb-production%40appspot.gserviceaccount.com&Signature=MN7aKKH5eR%2FiAuTb9uNLXM3NW%2B1EuDf5FeQnsuoYkQErwP4ROTlo6Vdra8DaCjT%2BVL4BrGy7eXSdmcCE76NrfffgnG4d6qdFMQQCLcyyy8p%2BmY41DszCPbfLItups1EcAcTlckE1PzuQhBbA%2FvsMTmxPrZz653YsMHIm4t36w7HIaLkZEZd6KcmTusHaGztZQzyOwhz2Yxc0ZYqfYH6jJ6OjIuHtRFeHvo5YDSm5mxeV%2Bk23N9o9vetWmvwQC3%2FGK3VRFxAYFliOKeT9uX5pXDhHjGF%2FmOER%2FeZ5t2N8JtY35u1J%2BUyxCyTkwdDeIeNLAKLmwZR7omNN%2FIHvNP3NmQ%3D%3D HTTP/1.1" 200 0
+2020-12-04 23:07:25,878 DEBUG   Thread-20 :1636 [connectionpool.py:_make_request():437] https://storage.googleapis.com:443 "PUT /wandb-production.appspot.com/pangqian/pq/256rktay/output.log?Expires=1607180845&GoogleAccessId=wandb-production%40appspot.gserviceaccount.com&Signature=J2f6DHrqES37g9DrGDFaRfl863OdxkRCJ3HKff%2BSshPUwyjkww5lJZ6sf6vPMMnK9T37SFua9Y4fK5cqVpUWmYGudEpZrhxO%2FiyKMABpKh53yUnBpbPRl81Zg5g2T%2B4Q03rlNXqsm1uu6E2cQ5NurSMQ4ovkZl3dm8VyYvq5xC3BKX%2FdilOad3QlQo4HFIGHeRXJWnDyOsDXUtsbwQHCDCkyoqbULJohJEF279u%2Bi6zzzRzlbLpzDFvNDv0UkBmGuik7miT%2B%2BMA3afGPvXWzIsG5ZgFwY%2BDLlOOr5mkzHrh9qxMufbDaWLqw6oqS7bBrReGSnWeskqnbf%2FN%2FloWcFw%3D%3D HTTP/1.1" 200 0
+2020-12-04 23:07:25,880 INFO    Thread-22 :1636 [upload_job.py:push():131] Uploaded file D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\wandb-summary.json
+2020-12-04 23:07:25,882 INFO    Thread-21 :1636 [upload_job.py:push():131] Uploaded file D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\requirements.txt
+2020-12-04 23:07:25,885 INFO    Thread-20 :1636 [upload_job.py:push():131] Uploaded file D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\output.log
+2020-12-04 23:07:26,342 DEBUG   Thread-19 :1636 [connectionpool.py:_make_request():437] https://storage.googleapis.com:443 "PUT /wandb-production.appspot.com/pangqian/pq/256rktay/model.h5?Expires=1607180845&GoogleAccessId=wandb-production%40appspot.gserviceaccount.com&Signature=U15eqOI8IA%2B0MljKai6ixPrr3MPOQXss83pCb8Qv3Hxxu2H7j6M8Fp59jYfY9AYGEQ8FBibhqzS9m5HF2KdS4%2BhdbIAI2wx%2BGhXiGuMSiopeLncu7uv0Wzyv44BIUAEGqRLBTwWoCTPHoAL6VIL6azFw3aa0%2FGcUmwM61IX32S4O5p50mBKMmsI9RO7diNTk0V5dCFX6h43RIILu9UYkwVB74s70AvQcxfuagJ73hzneF4i8%2Fp%2B9zeHjNVdgaydhXCgQTez3Qo0XnEOWE5f4dn3TOfzyX%2Bpxq%2Fd2JgI3XWkA5YaXJjjBbm73RJ%2Bph%2FQMtaxLllGSjASFcDN8lTyqkw%3D%3D HTTP/1.1" 200 0
+2020-12-04 23:07:26,347 INFO    Thread-19 :1636 [upload_job.py:push():131] Uploaded file D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\files\model.h5
+2020-12-04 23:07:26,348 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: poll_exit
+2020-12-04 23:07:26,348 DEBUG   SenderThread:1636 [sender.py:send():90] send: request
+2020-12-04 23:07:26,348 DEBUG   SenderThread:1636 [sender.py:send_request():99] send_request: poll_exit
+2020-12-04 23:07:28,349 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: poll_exit
+2020-12-04 23:07:28,350 DEBUG   SenderThread:1636 [sender.py:send():90] send: request
+2020-12-04 23:07:28,350 DEBUG   SenderThread:1636 [sender.py:send_request():99] send_request: poll_exit
+2020-12-04 23:07:28,350 INFO    SenderThread:1636 [file_pusher.py:join():174] waiting for file pusher
+2020-12-04 23:07:28,351 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: get_summary
+2020-12-04 23:07:28,352 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: sampled_history
+2020-12-04 23:07:28,353 DEBUG   HandlerThread:1636 [handler.py:handle_request():55] handle_request: shutdown
+2020-12-04 23:07:28,354 INFO    HandlerThread:1636 [handler.py:finish():271] shutting down handler
+2020-12-04 23:07:29,273 INFO    WriterThread:1636 [datastore.py:close():257] close: D:\pangqian\python\tidalDetect\Tidal\wandb\run-20201204_230626-256rktay\run-256rktay.wandb
+2020-12-04 23:07:29,351 INFO    SenderThread:1636 [sender.py:finish():642] shutting down sender
+2020-12-04 23:07:29,351 INFO    SenderThread:1636 [file_pusher.py:finish():169] shutting down file pusher
+2020-12-04 23:07:29,351 INFO    SenderThread:1636 [file_pusher.py:join():174] waiting for file pusher
+2020-12-04 23:07:29,353 INFO    MainThread:1636 [internal.py:handle_exit():138] Internal process exited
