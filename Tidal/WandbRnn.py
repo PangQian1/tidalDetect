@@ -60,13 +60,14 @@ def binary_PTA(y_true, y_pred, threshold=K.variable(value=0.5)):
 
 # 接着在模型的compile中设置metrics
 
-TIME_STEPS = 16     # same as the height of the image
-INPUT_SIZE = 2     # same as the width of the image
-BATCH_SIZE = 50
+TIME_STEPS = 2     # same as the height of the image
+INPUT_SIZE = 16     # same as the width of the image
+BATCH_SIZE = 35
 BATCH_INDEX = 0
 OUTPUT_SIZE = 2
-CELL_SIZE = 50
+CELL_SIZE = 80
 LR = 0.001
+EPOCHS = 100
 
 df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res\\resSam.csv', header=None)
 data_sample = np.array(df).astype(float)
@@ -80,8 +81,8 @@ print(y_train.size)
 
 # data pre-processing
 
-X_train = X_train.reshape(-1, 16, 2)/3      # normalize
-X_test = X_test.reshape(-1, 16, 2)/3      # normalize
+X_train = X_train.reshape(-1, 2, 16)/3      # normalize
+X_test = X_test.reshape(-1, 2, 16)/3      # normalize
 y_train = np_utils.to_categorical(y_train, num_classes=2)
 y_test = np_utils.to_categorical(y_test, num_classes=2)
 
@@ -93,8 +94,9 @@ model.add(LSTM(
     # for batch_input_shape, if using tensorflow as the backend, we have to put None for the batch_size.
     # Otherwise, model.evaluate() will get error.
     batch_input_shape=(None, TIME_STEPS, INPUT_SIZE),       # Or: input_dim=INPUT_SIZE, input_length=TIME_STEPS,
-    output_dim=CELL_SIZE,
+    #output_dim=CELL_SIZE,
     unroll=True,
+    units=CELL_SIZE
 ))
 
 # output layer
@@ -109,18 +111,7 @@ model.compile(optimizer=adam,
               metrics=['accuracy'])
 
 # training
-for step in range(4001):
-    # data shape = (batch_num, steps, inputs/outputs)
-    X_batch = X_train[BATCH_INDEX: BATCH_INDEX+BATCH_SIZE, :, :]
-    Y_batch = y_train[BATCH_INDEX: BATCH_INDEX+BATCH_SIZE, :]
-    cost = model.train_on_batch(X_batch, Y_batch)
-    BATCH_INDEX += BATCH_SIZE
-    BATCH_INDEX = 0 if BATCH_INDEX >= X_train.shape[0] else BATCH_INDEX
-
-    if step % 500 == 0:
-        # Log metrics with wandb
-        cost, accuracy = model.evaluate(X_test, y_test, batch_size=y_test.shape[0], verbose=False, callbacks=[WandbCallback()])
-        print('test cost: ', cost, 'test accuracy: ', accuracy)
+history = model.fit(X_train, y_train, epochs = EPOCHS, batch_size = BATCH_SIZE)
 
 
 y_pred = model.predict_classes(X_test)
@@ -153,7 +144,7 @@ print('f1: ', f1_score(y_test_new, y_pred, average='micro'),' ', 2*tp/(2*tp+fp+f
 
 df = pd.read_csv('data/test_4.csv', header=None)
 data_pre = np.array(df).astype(float)
-data_pre = data_pre.reshape(-1, 16, 2)/3
+data_pre = data_pre.reshape(-1, 2, 16)/3
 pre = model.predict_classes(data_pre)
 print(pre)
 dao.score(pre)

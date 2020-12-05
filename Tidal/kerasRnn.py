@@ -56,8 +56,8 @@ def binary_PTA(y_true, y_pred, threshold=K.variable(value=0.5)):
 
 # 接着在模型的compile中设置metrics
 
-TIME_STEPS = 16     # same as the height of the image
-INPUT_SIZE = 2     # same as the width of the image
+TIME_STEPS = 2     # same as the height of the image
+INPUT_SIZE = 16     # same as the width of the image
 BATCH_SIZE = 50
 BATCH_INDEX = 0
 OUTPUT_SIZE = 2
@@ -86,8 +86,8 @@ print(y_train.size)
 
 # data pre-processing
 
-X_train = X_train.reshape(-1, 16, 2)/3      # normalize
-X_test = X_test.reshape(-1, 16, 2)/3      # normalize
+X_train = X_train.reshape(-1, 2, 16)/3      # normalize
+X_test = X_test.reshape(-1, 2, 16)/3      # normalize
 y_train = np_utils.to_categorical(y_train, num_classes=2)
 y_test = np_utils.to_categorical(y_test, num_classes=2)
 
@@ -169,7 +169,7 @@ print('f1: ', f1_score(y_test_new, y_pred, average='micro'),' ', 2*tp/(2*tp+fp+f
 df = pd.read_csv('data/test_4.csv', header=None)
 #df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\Sample15_1.csv', header=None)
 data_pre = np.array(df).astype(float)
-data_pre = data_pre.reshape(-1, 16, 2)/3
+data_pre = data_pre.reshape(-1, 2, 16)/3
 pre = model.predict_classes(data_pre)
 print(pre)
 dao.score(pre)
