@@ -51,11 +51,11 @@ def numToCoor(gridTidalPath, bjTopologyPath,  gridPoiPath, outPath, date):
 if __name__ == '__main__':
 
     #读文件
-    gridTidalPath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridTidal_rnn_new15.csv'
+    gridTidalPath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridTidal_rnn_lstm15.csv'
     bjTopologyPath = "E:/G-1149/trafficCongestion/bjTopology.csv"
     gridPoiPath = 'E:/G-1149/trafficCongestion/网格化/gridPoi.csv'
 
     #写文件
-    coorPath = 'E:/G-1149/trafficCongestion/网格化/tidal/coordinate_new15.csv'
+    coorPath = 'E:/G-1149/trafficCongestion/网格化/tidal/coordinate_lstm15.csv'
 
     numToCoor(gridTidalPath, bjTopologyPath,  gridPoiPath, coorPath, '2019-06-15')

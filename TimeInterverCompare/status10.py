@@ -1,4 +1,7 @@
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import f1_score
 from Tidal import dao
 import matplotlib.pyplot as plt
 
@@ -9,12 +12,14 @@ import csv
 
 np.random.seed(1337)  # for reproducibility
 
+from keras.datasets import mnist
 from keras.utils import np_utils
 from keras.models import Sequential
 from keras.layers import SimpleRNN, Activation, Dense, LSTM, Dropout
+from keras.optimizers import Adam
 
 TIME_STEPS = 2     # same as the height of the image
-INPUT_SIZE = 16     # same as the width of the image
+INPUT_SIZE = 24     # same as the width of the image
 BATCH_SIZE = 35
 BATCH_INDEX = 0
 OUTPUT_SIZE = 2
@@ -22,9 +27,14 @@ CELL_SIZE = 80
 LR = 0.001
 EPOCHS = 100
 
-df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res\\resSam.csv', header=None)
+# download the mnist to the path '~/.keras/datasets/' if it is the first time to be called
+# X shape (60,000 28x28), y shape (10,000, )
+#(X_train, y_train), (X_test, y_test) = mnist.load_data()
+
+
+df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res10\\resSam.csv', header=None)
 data_sample = np.array(df).astype(float)
-df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res\\resLabel.csv', header=None)
+df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\4小时文件\\trainData\\res10\\resLabel.csv', header=None)
 data_label = np.array(df).astype(float)
 
 # df = pd.read_csv('E:\\G-1149\\trafficCon长短时记忆神经gestion\\训练数据\\trainData\\Sample15_1.csv', header=None)
@@ -32,14 +42,15 @@ data_label = np.array(df).astype(float)
 # df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\label.csv', header=None)
 # data_label = np.array(df).astype(float)
 
+
 X_train, X_test, y_train, y_test = train_test_split(data_sample,data_label,test_size=0.3, random_state=0)
 print(X_train.size)
 print(y_train.size)
 
 # data pre-processing
 
-X_train = X_train.reshape(-1, 2, 16)/3      # normalize
-X_test = X_test.reshape(-1, 2, 16)/3      # normalize
+X_train = X_train.reshape(-1, 2, 24)/3      # normalize
+X_test = X_test.reshape(-1, 2, 24)/3      # normalize
 y_train = np_utils.to_categorical(y_train, num_classes=2)
 y_test = np_utils.to_categorical(y_test, num_classes=2)
 
@@ -97,19 +108,29 @@ for i in y_test:
             tn += 1
     index += 1
 
-print('accuracy: ', accuracy_score(y_test_new, y_pred))
-print('precision: ', tp/(tp+fp))
-print('recall: ', tp/(tp+fn))
-print('f1: ', 2*tp/(2*tp+fp+fn))
+print('tp ', tp, ' fn ', fn, ' fp ', fp, ' tn ', tn)
+print('accuracy: ', accuracy_score(y_test_new, y_pred), ' ', (tp+tn)/(tp+tn+fp+fn))
+print('precision: ', precision_score(y_test_new, y_pred, average='micro'),' ', tp/(tp+fp))
+print('recall: ', recall_score(y_test_new, y_pred, average='micro'),' ', tp/(tp+fn))
+print('f1: ', f1_score(y_test_new, y_pred, average='micro'),' ', 2*tp/(2*tp+fp+fn))
+
+# 可视化
+# plt.plot(y_test, color = 'black', label = 'SZ000001 Price')
+# plt.plot(y_pred, color = 'green', label = 'Predicted SZ000001 Price')
+# plt.title('SZ000001 Price Prediction')
+# plt.xlabel('Time')
+# plt.ylabel('SZ000001 Price')
+# plt.legend()
+# plt.show()
 
 
 #df = pd.read_csv('C:\\Users\\98259\\Desktop\\6.9学习相关文档\\样本数据\\fiftMin\\samplePeakHour_训练数据 - 副本Line.csv',header=None)
-df = pd.read_csv('data/test_4.csv', header=None)
+df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\测试数据10\\test.csv', header=None)
 #df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\trainData\\Sample15_1.csv', header=None)
 data_pre = np.array(df).astype(float)
-data_pre = data_pre.reshape(-1, 2, 16)/3
+data_pre = data_pre.reshape(-1, 2, 24)/3
 pre = model.predict_classes(data_pre)
-# print(pre)
-dao.score(pre)
+print(pre)
+#dao.score(pre)
 
 print(model.summary())

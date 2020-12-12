@@ -1,6 +1,6 @@
 import wandb
 from wandb.keras import WandbCallback
-wandb.init(project="pqCnn")
+wandb.init(project="pq")
 
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
@@ -122,7 +122,7 @@ print('Training ------------')
 # Another way to train the model
 #model.fit(X_train, y_train, epochs=200, batch_size=128,)
 
-history = model.fit(X_train, y_train, epochs=100, batch_size=128, callbacks=[WandbCallback()])
+history = model.fit(X_train, y_train, epochs=200, batch_size=128, callbacks=[WandbCallback()])
 
 acc = history.history['accuracy']
 loss = history.history['loss']
@@ -184,4 +184,4 @@ print(model.summary())
 
 import os
 # Save model to wandb
-model.save(os.path.join(wandb.run.dir, "model.h1"))
+model.save(os.path.join(wandb.run.dir, "model2.h5"))

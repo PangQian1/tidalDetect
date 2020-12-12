@@ -1,0 +1,24 @@
+{
+    "os": "Windows-10-10.0.18362-SP0",
+    "python": "3.7.4",
+    "heartbeatAt": "2020-12-10T19:36:49.604655",
+    "startedAt": "2020-12-10T19:36:45.338000",
+    "docker": null,
+    "gpu": "GeForce GT 820M",
+    "gpu_count": 1,
+    "cpu_count": 4,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "codePath": "Tidal\\WandbCnn.py",
+    "program": "D:/pangqian/python/tidalDetect/Tidal/WandbCnn.py",
+    "git": {
+        "remote": "git@github.com:PangQian1/tidalDetect.git",
+        "commit": "4b14abc85ddc8182161f9343dbce11814644f330"
+    },
+    "email": "9825999220@qq.com",
+    "root": "D:/pangqian/python/tidalDetect",
+    "host": "DESKTOP-S7BNMT5",
+    "username": "98259",
+    "executable": "D:\\Users\\98259\\AppData\\Local\\Programs\\Python\\Python37\\python.exe"
+}

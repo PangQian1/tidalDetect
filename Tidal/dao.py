@@ -25,8 +25,8 @@ def score(y_pred):
             else:
                 tn += 1
         index += 1
-    print('tp ', tp, ' fn ', fn, ' fp ', fp, ' tn ', tn)
+    # print('tp ', tp, ' fn ', fn, ' fp ', fp, ' tn ', tn)
     print('accuracy: ', (tp + tn) / (tp + tn + fp + fn))
-    print('precision: ', tp / (tp + fp))
-    print('recall: ', tp / (tp + fn))
-    print('f1: ', 2 * tp / (2 * tp + fp + fn))
+    # print('precision: ', tp / (tp + fp))
+    # print('recall: ', tp / (tp + fn))
+    # print('f1: ', 2 * tp / (2 * tp + fp + fn))

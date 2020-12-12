@@ -39,7 +39,7 @@ def getTidalRoadAttr(bjTopologyPath, gridTidalPath, gridPoiPath, gridSplicePath,
                     if(link != ''):#由于对预测后的网格文件进行了排序处理，Excel自动格式对齐，因此出现了空白填充
                         if(nameDict[link] not in nameList):
                             nameList.append(nameDict[link])
-            if(length > 4):
+            if(length > 0):
                 csv_writer.writerow([gridPoiDict[r[0]], gridPoiDict[r[length-1]], length*100, '-'.join(nameList), date])
 
     f.close()
@@ -68,16 +68,16 @@ def splice(gridPath, gridSplicePath):
 if __name__ == '__main__':
 
     #读文件
-    gridTidalPath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridTidal_rnn_new13.csv'
+    gridTidalPath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridTidal_rnn_lstm14.csv'
     gridPoiPath = 'E:/G-1149/trafficCongestion/网格化/gridPoi.csv'
     bjTopologyPath = "E:/G-1149/trafficCongestion/bjTopology.csv"
 
     #写文件
-    resPath = 'E:/G-1149/trafficCongestion/网格化/tidal/name13(500).csv'
-    gridSplicePath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridSplice13.csv'
+    resPath = 'E:/G-1149/trafficCongestion/网格化/tidal/name_lstm14.csv'
+    gridSplicePath = 'E:/G-1149/trafficCongestion/网格化/tidal/gridSplice_lstm14.csv'
 
     splice(gridTidalPath, gridSplicePath)
-    getTidalRoadAttr(bjTopologyPath, gridTidalPath, gridPoiPath, gridSplicePath, resPath, '2019-06-13')
+    getTidalRoadAttr(bjTopologyPath, gridTidalPath, gridPoiPath, gridSplicePath, resPath, '2019-06-14')
 
 
 
