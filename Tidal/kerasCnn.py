@@ -184,11 +184,10 @@ for i in y_test:
             tn += 1
     index += 1
 
-print('tp ', tp, ' fn ', fn, ' fp ', fp, ' tn ', tn)
-print('accuracy: ', accuracy_score(y_test_new, y_pred), ' ', (tp+tn)/(tp+tn+fp+fn))
-print('precision: ', precision_score(y_test_new, y_pred, average='micro'),' ', tp/(tp+fp))
-print('recall: ', recall_score(y_test_new, y_pred, average='micro'),' ', tp/(tp+fn))
-print('f1: ', f1_score(y_test_new, y_pred, average='micro'),' ', 2*tp/(2*tp+fp+fn))
+print('accuracy: ', accuracy_score(y_test_new, y_pred))
+print('precision: ', tp/(tp+fp))
+print('recall: ', tp/(tp+fn))
+print('f1: ', 2*tp/(2*tp+fp+fn))
 
 #df = pd.read_csv('E:\\G-1149\\trafficCongestion\\训练数据\\测试数据\\test.csv', header=None)
 #df = pd.read_csv('data/test_4.csv', header=None)
@@ -196,5 +195,5 @@ df = pd.read_csv('C:\\Users\\98259\\Desktop\\6.9学习相关文档\\样本数据
 data_pre = np.array(df).astype(float)
 data_pre = data_pre.reshape(-1, 1,16, 2)/3
 pre = model.predict_classes(data_pre)
-print(pre)
+#print(pre)
 dao.score(pre)

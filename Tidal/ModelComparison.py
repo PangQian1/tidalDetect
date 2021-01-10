@@ -100,8 +100,8 @@ def main():
     methods['Support Vector Machines'] = svc
 
     # 3. Stochastic Gradient Descent
-    sgd = linear_model.SGDClassifier()
-    methods['Stochastic Gradient Descent'] = sgd
+    # sgd = linear_model.SGDClassifier()
+    # methods['Stochastic Gradient Descent'] = sgd
 
     # 4. Nearest Neighbors
     knn = neighbors.KNeighborsClassifier(n_neighbors=5, weights='uniform')
@@ -121,8 +121,8 @@ def main():
     methods['AdaBoost'] = ada
 
     # 7.2 Bagging
-    bag = ensemble.BaggingClassifier()
-    methods['Bagging'] = bag
+    # bag = ensemble.BaggingClassifier()
+    # methods['Bagging'] = bag
 
     # 7.3 Random Forest
     rf = ensemble.RandomForestClassifier()
@@ -133,8 +133,8 @@ def main():
     methods['Gradient Tree Boosting'] = gbdt
 
     # 7.5 XGBoosting
-    xg = XGBClassifier()
-    methods['XGBoosting'] = xg
+    # xg = XGBClassifier()
+    # methods['XGBoosting'] = xg
     for name, model in methods.items():
         get_result(name, model, x_train, y_train, x_test, y_test, table)
     print(table)

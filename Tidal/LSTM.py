@@ -71,7 +71,8 @@ epochs = range(1, len(acc) + 1)
 plt.title('Loss')
 #plt.plot(epochs, acc, 'red', label='Training acc')
 plt.plot(epochs, loss, 'blue', label='Validation loss')
-plt.xlabel('epochs');
+plt.xlabel('epochs')
+plt.ylabel('loss')
 plt.legend()
 plt.show()
 
@@ -98,9 +99,9 @@ for i in y_test:
     index += 1
 
 print('accuracy: ', accuracy_score(y_test_new, y_pred))
-print('precision: ', tp/(tp+fp))
-print('recall: ', tp/(tp+fn))
-print('f1: ', 2*tp/(2*tp+fp+fn))
+# print('precision: ', tp/(tp+fp))
+# print('recall: ', tp/(tp+fn))
+# print('f1: ', 2*tp/(2*tp+fp+fn))
 
 
 #df = pd.read_csv('C:\\Users\\98259\\Desktop\\6.9学习相关文档\\样本数据\\fiftMin\\samplePeakHour_训练数据 - 副本Line.csv',header=None)
