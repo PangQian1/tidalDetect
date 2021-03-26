@@ -89,7 +89,7 @@ python-gitlab==2.0.1
 pytz==2019.3
 pywin32==228
 pywinpty==0.5.7
-pyyaml==5.3
+pyyaml==5.4
 pyzmq==19.0.1
 qtconsole==4.7.5
 qtpy==1.9.0
